@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Job Recommendations</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            color: white;
+
+            background:
+                radial-gradient(circle at 10% 10%,
+                    rgba(59, 130, 246, 0.20),
+                    transparent 30%),
+
+                radial-gradient(circle at 90% 20%,
+                    rgba(139, 92, 246, 0.20),
+                    transparent 30%),
+
+                #050816;
+
+        }
+
+
+        /* =================================
+           NAVBAR
+        ================================= */
+
+        .navbar-custom {
+
+            background:
+                rgba(5, 8, 22, 0.75);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            backdrop-filter:
+                blur(20px);
+
+        }
+
+
+        .brand {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+        }
+
+
+        .brand:hover {
+
+            color: white;
+
+        }
+
+
+        .brand i {
+
+            color: #60a5fa;
+
+        }
+
+
+        /* =================================
+           MAIN
+        ================================= */
+
+        .main-container {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 45px 20px 70px;
+
+        }
+
+
+        /* =================================
+           HERO
+        ================================= */
+
+        .hero {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .ai-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 15px;
+
+            border-radius: 50px;
+
+            color: #93c5fd;
+
+            background:
+                rgba(59, 130, 246, 0.10);
+
+            border:
+                1px solid rgba(96, 165, 250, 0.20);
+
+            font-size: 13px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .ai-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+            box-shadow:
+                0 0 10px #22c55e;
+
+        }
+
+
+        .hero h1 {
+
+            font-size:
+                clamp(34px, 5vw, 54px);
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .gradient-text {
+
+            background:
+                linear-gradient(90deg,
+                    #60a5fa,
+                    #a78bfa,
+                    #22d3ee);
+
+            background-clip: text;
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+
+        .hero p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #94a3b8;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =================================
+           SEARCH
+        ================================= */
+
+        .search-section {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-bottom: 35px;
+
+            padding: 18px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.09);
+
+            backdrop-filter:
+                blur(20px);
+
+        }
+
+
+        .search-box {
+
+            position: relative;
+
+            flex: 1;
+
+        }
+
+
+        .search-box i {
+
+            position: absolute;
+
+            left: 18px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #64748b;
+
+        }
+
+
+        .search-box input {
+
+            width: 100%;
+
+            height: 52px;
+
+            padding:
+                0 20px 0 48px;
+
+            border: none;
+
+            outline: none;
+
+            border-radius: 13px;
+
+            color: white;
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+        }
+
+
+        .search-box input::placeholder {
+
+            color: #64748b;
+
+        }
+
+
+        .filter-btn {
+
+            height: 52px;
+
+            padding:
+                0 22px;
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+
+            border-radius: 13px;
+
+            color: #cbd5e1;
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+        }
+
+
+        .filter-btn:hover {
+
+            color: white;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+
+        }
+
+
+        /* =================================
+           SECTION HEADER
+        ================================= */
+
+        .section-header {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .section-header h3 {
+
+            margin: 0;
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+        }
+
+
+        .result-count {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =================================
+           JOB GRID
+        ================================= */
+
+        .job-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        /* =================================
+           JOB CARD
+        ================================= */
+
+        .job-card {
+
+            position: relative;
+
+            padding: 25px;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.09);
+
+            backdrop-filter:
+                blur(20px);
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .job-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(96, 165, 250, 0.35);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.25);
+
+        }
+
+
+        /* =================================
+           MATCH BADGE
+        ================================= */
+
+        .match {
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 20px;
+
+            padding: 7px 11px;
+
+            border-radius: 50px;
+
+            color: #86efac;
+
+            background:
+                rgba(34, 197, 94, 0.10);
+
+            border:
+                1px solid rgba(34, 197, 94, 0.18);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =================================
+           COMPANY ICON
+        ================================= */
+
+        .company-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 15px;
+
+            margin-bottom: 18px;
+
+            color: #93c5fd;
+
+            background:
+                linear-gradient(135deg,
+                    rgba(37, 99, 235, 0.25),
+                    rgba(124, 58, 237, 0.25));
+
+            border:
+                1px solid rgba(96, 165, 250, 0.15);
+
+        }
+
+
+        .company-icon i {
+
+            font-size: 24px;
+
+        }
+
+
+        /* =================================
+           JOB DETAILS
+        ================================= */
+
+        .job-title {
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            margin-bottom: 6px;
+
+            padding-right: 90px;
+
+        }
+
+
+        .company {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            margin-bottom: 17px;
+
+        }
+
+
+        .job-info {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+        }
+
+
+        .job-info span {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+        }
+
+
+        .job-info i {
+
+            color: #60a5fa;
+
+        }
+
+
+        /* =================================
+           SKILLS
+        ================================= */
+
+        .skills {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .skill {
+
+            padding:
+                6px 10px;
+
+            border-radius: 8px;
+
+            color: #cbd5e1;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            font-size: 11px;
+
+        }
+
+
+        /* =================================
+           CARD FOOTER
+        ================================= */
+
+        .card-footer-custom {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.07);
+
+        }
+
+
+        .salary {
+
+            color: #e2e8f0;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .salary small {
+
+            display: block;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: normal;
+
+            margin-top: 3px;
+
+        }
+
+
+        .apply-btn {
+
+            padding:
+                9px 17px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            background:
+                linear-gradient(90deg,
+                    #2563eb,
+                    #7c3aed);
+
+            text-decoration: none;
+
+            transition: 0.3s;
+
+        }
+
+
+        .apply-btn:hover {
+
+            color: white;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 25px rgba(37, 99, 235, 0.25);
+
+        }
+
+
+        /* =================================
+           AI INFO
+        ================================= */
+
+        .ai-info {
+
+            margin-top: 35px;
+
+            padding: 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(90deg,
+                    rgba(37, 99, 235, 0.10),
+                    rgba(124, 58, 237, 0.10));
+
+            border:
+                1px solid rgba(96, 165, 250, 0.12);
+
+        }
+
+
+        .ai-info-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            min-width: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                rgba(96, 165, 250, 0.10);
+
+            color: #60a5fa;
+
+        }
+
+
+        .ai-info h6 {
+
+            margin: 0 0 4px;
+
+            font-weight: 700;
+
+        }
+
+
+        .ai-info p {
+
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =================================
+           EMPTY STATE
+        ================================= */
+
+        .empty-state {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+        }
+
+
+        .empty-state i {
+
+            font-size: 50px;
+
+            color: #475569;
+
+        }
+
+
+        .empty-state h4 {
+
+            margin-top: 15px;
+
+        }
+
+
+        .empty-state p {
+
+            color: #64748b;
+
+        }
+
+
+        /* =================================
+           RESPONSIVE
+        ================================= */
+
+        @media (max-width: 800px) {
+
+            .job-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .search-section {
+
+                flex-direction: column;
+
+            }
+
+
+            .filter-btn {
+
+                width: 100%;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .main-container {
+
+                padding:
+                    30px 15px;
+
+            }
+
+
+            .job-card {
+
+                padding: 20px;
+
+            }
+
+
+            .job-title {
+
+                padding-right: 70px;
+
+                font-size: 18px;
+
+            }
+
+
+            .ai-info {
+
+                align-items:
+                    flex-start;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+     NAVBAR
+================================= -->
+
+    <nav class="navbar navbar-custom">
+
+        <div class="container-fluid px-4">
+
+            <div class="d-flex
+                    justify-content-between
+                    align-items-center
+                    w-100">
+
+
+                <a href="{{ url_for('dashboard') }}" class="brand">
+
+                    <i class="bi bi-robot me-2"></i>
+
+                    AI Resume Screening
+
+                </a>
+
+
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light btn-sm">
+
+                    <i class="bi bi-grid me-1"></i>
+
+                    Dashboard
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =================================
+     MAIN
+================================= -->
+
+    <main class="main-container">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+
+            <div class="ai-badge">
+
+                <span class="ai-dot"></span>
+
+                AI-powered recommendations
+
+            </div>
+
+
+            <h1>
+
+                Jobs matched to your
+
+                <span class="gradient-text">
+                    skills
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Our AI analyzes your resume profile,
+                skills and experience to discover
+                relevant career opportunities.
+
+            </p>
+
+
+        </section>
+
+
+        <!-- =================================
+         SEARCH
+    ================================= -->
+
+        <div class="search-section">
+
+
+            <div class="search-box">
+
+                <i class="bi bi-search"></i>
+
+                <input type="text" id="searchInput" placeholder="Search job title, company or skill...">
+
+            </div>
+
+
+            <button class="filter-btn">
+
+                <i class="bi bi-funnel me-2"></i>
+
+                Filters
+
+            </button>
+
+
+        </div>
+
+
+        <!-- =================================
+         SECTION HEADER
+    ================================= -->
+
+        <div class="section-header">
+
+            <h3>
+
+                Recommended for you
+
+            </h3>
+
+
+            <span class="result-count" id="resultCount">
+
+                6 jobs found
+
+            </span>
+
+        </div>
+
+
+        <!-- =================================
+         JOB GRID
+    ================================= -->
+
+        <div class="job-grid" id="jobGrid">
+
+
+            <!-- JOB 1 -->
+
+            <div class="job-card" data-search="java developer tcs java spring boot mysql sql">
+
+
+                <span class="match">
+
+                    94% Match
+
+                </span>
+
+
+                <div class="company-icon">
+
+                    <i class="bi bi-building"></i>
+
+                </div>
+
+
+                <div class="job-title">
+
+                    Java Developer
+
+                </div>
+
+
+                <div class="company">
+
+                    Tata Consultancy Services
+
+                </div>
+
+
+                <div class="job-info">
+
+                    <span>
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        Hyderabad
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-briefcase"></i>
+
+                        Fresher
+
+                    </span>
+
+                </div>
+
+
+                <div class="skills">
+
+                    <span class="skill">
+                        Java
+                    </span>
+
+                    <span class="skill">
+                        Spring Boot
+                    </span>
+
+                    <span class="skill">
+                        MySQL
+                    </span>
+
+                    <span class="skill">
+                        SQL
+                    </span>
+
+                </div>
+
+
+                <div class="card-footer-custom">
+
+
+                    <div class="salary">
+
+                        ₹4 - 7 LPA
+
+                        <small>
+                            Estimated range
+                        </small>
+
+                    </div>
+
+
+                    <a href="#" class="apply-btn">
+
+                        View Job
+
+                        <i class="bi bi-arrow-up-right ms-1"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- JOB 2 -->
+
+            <div class="job-card" data-search="frontend developer infosys html css javascript react">
+
+
+                <span class="match">
+
+                    91% Match
+
+                </span>
+
+
+                <div class="company-icon">
+
+                    <i class="bi bi-code-slash"></i>
+
+                </div>
+
+
+                <div class="job-title">
+
+                    Frontend Developer
+
+                </div>
+
+
+                <div class="company">
+
+                    Infosys
+
+                </div>
+
+
+                <div class="job-info">
+
+                    <span>
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        Bengaluru
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-briefcase"></i>
+
+                        Fresher
+
+                    </span>
+
+                </div>
+
+
+                <div class="skills">
+
+                    <span class="skill">
+                        HTML
+                    </span>
+
+                    <span class="skill">
+                        CSS
+                    </span>
+
+                    <span class="skill">
+                        JavaScript
+                    </span>
+
+                    <span class="skill">
+                        React
+                    </span>
+
+                </div>
+
+
+                <div class="card-footer-custom">
+
+
+                    <div class="salary">
+
+                        ₹3.5 - 6 LPA
+
+                        <small>
+                            Estimated range
+                        </small>
+
+                    </div>
+
+
+                    <a href="#" class="apply-btn">
+
+                        View Job
+
+                        <i class="bi bi-arrow-up-right ms-1"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- JOB 3 -->
+
+            <div class="job-card" data-search="python developer accenture python machine learning sql flask">
+
+
+                <span class="match">
+
+                    88% Match
+
+                </span>
+
+
+                <div class="company-icon">
+
+                    <i class="bi bi-cpu"></i>
+
+                </div>
+
+
+                <div class="job-title">
+
+                    Python Developer
+
+                </div>
+
+
+                <div class="company">
+
+                    Accenture
+
+                </div>
+
+
+                <div class="job-info">
+
+                    <span>
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        Hyderabad
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-briefcase"></i>
+
+                        Entry Level
+
+                    </span>
+
+                </div>
+
+
+                <div class="skills">
+
+                    <span class="skill">
+                        Python
+                    </span>
+
+                    <span class="skill">
+                        Flask
+                    </span>
+
+                    <span class="skill">
+                        SQL
+                    </span>
+
+                    <span class="skill">
+                        ML
+                    </span>
+
+                </div>
+
+
+                <div class="card-footer-custom">
+
+
+                    <div class="salary">
+
+                        ₹4 - 7 LPA
+
+                        <small>
+                            Estimated range
+                        </small>
+
+                    </div>
+
+
+                    <a href="#" class="apply-btn">
+
+                        View Job
+
+                        <i class="bi bi-arrow-up-right ms-1"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- JOB 4 -->
+
+            <div class="job-card" data-search="software engineer cognizant java python sql">
+
+
+                <span class="match">
+
+                    86% Match
+
+                </span>
+
+
+                <div class="company-icon">
+
+                    <i class="bi bi-laptop"></i>
+
+                </div>
+
+
+                <div class="job-title">
+
+                    Software Engineer
+
+                </div>
+
+
+                <div class="company">
+
+                    Cognizant
+
+                </div>
+
+
+                <div class="job-info">
+
+                    <span>
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        Chennai
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-briefcase"></i>
+
+                        Graduate
+
+                    </span>
+
+                </div>
+
+
+                <div class="skills">
+
+                    <span class="skill">
+                        Java
+                    </span>
+
+                    <span class="skill">
+                        Python
+                    </span>
+
+                    <span class="skill">
+                        SQL
+                    </span>
+
+                    <span class="skill">
+                        OOP
+                    </span>
+
+                </div>
+
+
+                <div class="card-footer-custom">
+
+
+                    <div class="salary">
+
+                        ₹4 - 6 LPA
+
+                        <small>
+                            Estimated range
+                        </small>
+
+                    </div>
+
+
+                    <a href="#" class="apply-btn">
+
+                        View Job
+
+                        <i class="bi bi-arrow-up-right ms-1"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- JOB 5 -->
+
+            <div class="job-card" data-search="data analyst wipro python sql excel power bi">
+
+
+                <span class="match">
+
+                    82% Match
+
+                </span>
+
+
+                <div class="company-icon">
+
+                    <i class="bi bi-bar-chart"></i>
+
+                </div>
+
+
+                <div class="job-title">
+
+                    Data Analyst
+
+                </div>
+
+
+                <div class="company">
+
+                    Wipro
+
+                </div>
+
+
+                <div class="job-info">
+
+                    <span>
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        Pune
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-briefcase"></i>
+
+                        Entry Level
+
+                    </span>
+
+                </div>
+
+
+                <div class="skills">
+
+                    <span class="skill">
+                        Python
+                    </span>
+
+                    <span class="skill">
+                        SQL
+                    </span>
+
+                    <span class="skill">
+                        Excel
+                    </span>
+
+                    <span class="skill">
+                        Power BI
+                    </span>
+
+                </div>
+
+
+                <div class="card-footer-custom">
+
+
+                    <div class="salary">
+
+                        ₹3.5 - 6 LPA
+
+                        <small>
+                            Estimated range
+                        </small>
+
+                    </div>
+
+
+                    <a href="#" class="apply-btn">
+
+                        View Job
+
+                        <i class="bi bi-arrow-up-right ms-1"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- JOB 6 -->
+
+            <div class="job-card" data-search="full stack developer tech mahindra java javascript mysql html css">
+
+
+                <span class="match">
+
+                    79% Match
+
+                </span>
+
+
+                <div class="company-icon">
+
+                    <i class="bi bi-stack"></i>
+
+                </div>
+
+
+                <div class="job-title">
+
+                    Full Stack Developer
+
+                </div>
+
+
+                <div class="company">
+
+                    Tech Mahindra
+
+                </div>
+
+
+                <div class="job-info">
+
+                    <span>
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        Hyderabad
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-briefcase"></i>
+
+                        Graduate
+
+                    </span>
+
+                </div>
+
+
+                <div class="skills">
+
+                    <span class="skill">
+                        Java
+                    </span>
+
+                    <span class="skill">
+                        JavaScript
+                    </span>
+
+                    <span class="skill">
+                        MySQL
+                    </span>
+
+                    <span class="skill">
+                        HTML/CSS
+                    </span>
+
+                </div>
+
+
+                <div class="card-footer-custom">
+
+
+                    <div class="salary">
+
+                        ₹4 - 7 LPA
+
+                        <small>
+                            Estimated range
+                        </small>
+
+                    </div>
+
+
+                    <a href="#" class="apply-btn">
+
+                        View Job
+
+                        <i class="bi bi-arrow-up-right ms-1"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================
+         EMPTY SEARCH RESULT
+    ================================= -->
+
+        <div class="empty-state" id="emptyState">
+
+            <i class="bi bi-search"></i>
+
+            <h4>
+                No jobs found
+            </h4>
+
+            <p>
+                Try searching for another job title,
+                company or skill.
+            </p>
+
+        </div>
+
+
+        <!-- =================================
+         AI INFO
+    ================================= -->
+
+        <div class="ai-info">
+
+
+            <div class="ai-info-icon">
+
+                <i class="bi bi-stars"></i>
+
+            </div>
+
+
+            <div>
+
+                <h6>
+                    How AI matching works
+                </h6>
+
+                <p>
+
+                    Job matches are generated by comparing
+                    your resume skills and profile with
+                    job requirements.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =================================
+     JAVASCRIPT
+================================= -->
+
+    <script>
+
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+
+        const jobCards =
+            document.querySelectorAll(".job-card");
+
+
+        const resultCount =
+            document.getElementById("resultCount");
+
+
+        const emptyState =
+            document.getElementById("emptyState");
+
+
+        searchInput.addEventListener(
+            "input",
+            function () {
+
+
+                const searchValue =
+                    this.value
+                        .toLowerCase()
+                        .trim();
+
+
+                let visibleJobs = 0;
+
+
+                jobCards.forEach(
+                    function (card) {
+
+
+                        const searchData =
+                            card
+                                .getAttribute("data-search")
+                                .toLowerCase();
+
+
+                        if (
+                            searchData.includes(
+                                searchValue
+                            )
+                        ) {
+
+
+                            card.style.display =
+                                "block";
+
+
+                            visibleJobs++;
+
+
+                        } else {
+
+
+                            card.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+
+                resultCount.textContent =
+                    visibleJobs +
+                    (visibleJobs === 1
+                        ? " job found"
+                        : " jobs found");
+
+
+                if (visibleJobs === 0) {
+
+                    emptyState.style.display =
+                        "block";
+
+                } else {
+
+                    emptyState.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign in | ARS</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyan: #00e5ff;
+            --blue: #4285ff;
+            --purple: #7657ff;
+            --text: #172033;
+            --muted: #718096;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 25px;
+
+            overflow: hidden;
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+
+                radial-gradient(circle at 10% 10%,
+                    rgba(0, 229, 255, .30),
+                    transparent 28%),
+
+                radial-gradient(circle at 90% 90%,
+                    rgba(118, 87, 255, .35),
+                    transparent 30%),
+
+                linear-gradient(135deg,
+                    #04081d,
+                    #07143d,
+                    #050d2c);
+        }
+
+
+        /* =========================================
+           AI BACKGROUND
+        ========================================= */
+
+        .ai-background {
+
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 0;
+        }
+
+
+        /* =========================================
+           GLOWING ORBS
+        ========================================= */
+
+        .glow {
+
+            position: absolute;
+
+            width: 330px;
+
+            height: 330px;
+
+            border-radius: 50%;
+
+            filter: blur(100px);
+
+            opacity: .45;
+
+            animation:
+                glowMove 10s ease-in-out infinite alternate;
+        }
+
+
+        .glow.one {
+
+            top: -140px;
+
+            left: -100px;
+
+            background: #00e5ff;
+        }
+
+
+        .glow.two {
+
+            top: 10%;
+
+            right: -120px;
+
+            background: #7657ff;
+
+            animation-delay: -3s;
+        }
+
+
+        .glow.three {
+
+            left: 5%;
+
+            bottom: -170px;
+
+            background: #006eff;
+
+            animation-delay: -5s;
+        }
+
+
+        .glow.four {
+
+            right: 15%;
+
+            bottom: -150px;
+
+            background: #b54cff;
+
+            animation-delay: -7s;
+        }
+
+
+        @keyframes glowMove {
+
+            0% {
+                transform:
+                    translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform:
+                    translate(40px, -35px) scale(1.15);
+            }
+        }
+
+
+        /* =========================================
+           FLOATING AI OBJECTS
+        ========================================= */
+
+        .ai-object {
+
+            position: absolute;
+
+            width: 105px;
+
+            height: 105px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 30px;
+
+            border:
+                1px solid rgba(0, 229, 255, .30);
+
+            background:
+                rgba(0, 100, 180, .12);
+
+            backdrop-filter:
+                blur(12px);
+
+            color:
+                rgba(120, 240, 255, .65);
+
+            font-size: 40px;
+
+            box-shadow:
+
+                0 0 35px rgba(0, 229, 255, .20),
+
+                inset 0 0 30px rgba(255, 255, 255, .04);
+
+            filter: blur(1px);
+
+            animation:
+                floating 8s ease-in-out infinite;
+        }
+
+
+        .ai-object.one {
+
+            top: 10%;
+
+            left: 8%;
+
+            transform:
+                rotate(-14deg);
+        }
+
+
+        .ai-object.two {
+
+            top: 13%;
+
+            right: 8%;
+
+            transform:
+                rotate(12deg);
+
+            animation-delay: -2s;
+        }
+
+
+        .ai-object.three {
+
+            bottom: 11%;
+
+            left: 9%;
+
+            transform:
+                rotate(9deg);
+
+            animation-delay: -4s;
+        }
+
+
+        .ai-object.four {
+
+            right: 8%;
+
+            bottom: 13%;
+
+            transform:
+                rotate(-12deg);
+
+            animation-delay: -6s;
+        }
+
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                margin-top: 0;
+            }
+
+            50% {
+                margin-top: -25px;
+            }
+        }
+
+
+        /* =========================================
+           NEURAL NETWORK
+        ========================================= */
+
+        .network {
+
+            position: absolute;
+
+            width: 500px;
+
+            height: 350px;
+
+            left: 50%;
+
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            opacity: .20;
+        }
+
+
+        .node {
+
+            position: absolute;
+
+            width: 10px;
+
+            height: 10px;
+
+            border-radius: 50%;
+
+            background:
+                #72efff;
+
+            box-shadow:
+                0 0 12px #00e5ff,
+                0 0 30px #00e5ff;
+
+            animation:
+                nodePulse 3s ease-in-out infinite;
+        }
+
+
+        .node:nth-child(1) {
+            left: 10%;
+            top: 25%;
+        }
+
+        .node:nth-child(2) {
+            left: 10%;
+            top: 70%;
+            animation-delay: -.5s;
+        }
+
+        .node:nth-child(3) {
+            left: 38%;
+            top: 15%;
+            animation-delay: -1s;
+        }
+
+        .node:nth-child(4) {
+            left: 38%;
+            top: 50%;
+            animation-delay: -1.5s;
+        }
+
+        .node:nth-child(5) {
+            left: 38%;
+            top: 85%;
+            animation-delay: -2s;
+        }
+
+        .node:nth-child(6) {
+            right: 12%;
+            top: 30%;
+            animation-delay: -2.5s;
+        }
+
+        .node:nth-child(7) {
+            right: 12%;
+            top: 70%;
+            animation-delay: -3s;
+        }
+
+
+        @keyframes nodePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: .5;
+            }
+
+            50% {
+                transform: scale(1.5);
+                opacity: 1;
+            }
+        }
+
+
+        /* =========================================
+           CONNECTION LINES
+        ========================================= */
+
+        .connection {
+
+            position: absolute;
+
+            height: 1px;
+
+            transform-origin: left center;
+
+            background:
+                linear-gradient(90deg,
+                    transparent,
+                    #00e5ff,
+                    transparent);
+
+            box-shadow:
+                0 0 10px rgba(0, 229, 255, .7);
+        }
+
+
+        .c1 {
+            width: 150px;
+            left: 11%;
+            top: 28%;
+            transform: rotate(-9deg);
+        }
+
+        .c2 {
+            width: 150px;
+            left: 11%;
+            top: 28%;
+            transform: rotate(20deg);
+        }
+
+        .c3 {
+            width: 150px;
+            left: 40%;
+            top: 18%;
+            transform: rotate(10deg);
+        }
+
+        .c4 {
+            width: 150px;
+            left: 40%;
+            top: 52%;
+            transform: rotate(-10deg);
+        }
+
+        .c5 {
+            width: 150px;
+            left: 40%;
+            top: 85%;
+            transform: rotate(-20deg);
+        }
+
+
+        /* =========================================
+           PARTICLES
+        ========================================= */
+
+        .particle {
+
+            position: absolute;
+
+            width: 4px;
+
+            height: 4px;
+
+            border-radius: 50%;
+
+            background:
+                #76edff;
+
+            box-shadow:
+                0 0 14px #00e5ff;
+
+            animation:
+                particleMove 7s linear infinite;
+        }
+
+
+        .p1 {
+            left: 20%;
+            top: 30%;
+        }
+
+        .p2 {
+            left: 70%;
+            top: 20%;
+            animation-delay: -2s;
+        }
+
+        .p3 {
+            left: 80%;
+            top: 60%;
+            animation-delay: -4s;
+        }
+
+        .p4 {
+            left: 25%;
+            top: 75%;
+            animation-delay: -1s;
+        }
+
+        .p5 {
+            left: 50%;
+            top: 10%;
+            animation-delay: -5s;
+        }
+
+        .p6 {
+            left: 90%;
+            top: 40%;
+            animation-delay: -3s;
+        }
+
+
+        @keyframes particleMove {
+
+            0% {
+                transform: translateY(0);
+                opacity: .1;
+            }
+
+            50% {
+                opacity: .8;
+            }
+
+            100% {
+                transform: translateY(-90px);
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================================
+           LOGIN CARD
+        ========================================= */
+
+        .login-card {
+
+            position: relative;
+
+            z-index: 5;
+
+            width:
+                min(100%, 560px);
+
+            padding: 42px;
+
+            border-radius: 28px;
+
+            background:
+
+                linear-gradient(145deg,
+                    rgba(255, 255, 255, .97),
+                    rgba(242, 248, 255, .94));
+
+            border:
+                1px solid rgba(0, 229, 255, .55);
+
+            backdrop-filter:
+                blur(25px);
+
+            box-shadow:
+
+                0 0 15px rgba(0, 229, 255, .18),
+
+                0 0 45px rgba(0, 229, 255, .15),
+
+                0 0 80px rgba(118, 87, 255, .15),
+
+                0 30px 80px rgba(0, 0, 0, .38);
+
+            animation:
+                cardAppear .7s ease,
+                cardNeon 4s ease-in-out infinite;
+        }
+
+
+        /* Animated border */
+
+        .login-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: -1px;
+
+            border-radius: 28px;
+
+            padding: 1px;
+
+            background:
+
+                linear-gradient(90deg,
+                    transparent,
+                    #00e5ff,
+                    #7657ff,
+                    #00e5ff,
+                    transparent);
+
+            background-size:
+                300% 100%;
+
+            -webkit-mask:
+
+                linear-gradient(#fff 0 0) content-box,
+
+                linear-gradient(#fff 0 0);
+
+            mask:
+
+                linear-gradient(#fff 0 0) content-box,
+
+                linear-gradient(#fff 0 0);
+
+            -webkit-mask-composite:
+                xor;
+
+            mask-composite:
+                exclude;
+
+            animation:
+                borderAnimation 5s linear infinite;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes borderAnimation {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+
+        @keyframes cardNeon {
+
+            0%,
+            100% {
+
+                box-shadow:
+
+                    0 0 15px rgba(0, 229, 255, .16),
+
+                    0 0 45px rgba(0, 229, 255, .13),
+
+                    0 0 80px rgba(118, 87, 255, .13),
+
+                    0 30px 80px rgba(0, 0, 0, .38);
+            }
+
+            50% {
+
+                box-shadow:
+
+                    0 0 20px rgba(0, 229, 255, .25),
+
+                    0 0 55px rgba(0, 229, 255, .20),
+
+                    0 0 90px rgba(118, 87, 255, .20),
+
+                    0 30px 85px rgba(0, 0, 0, .40);
+            }
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px) scale(.97);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0) scale(1);
+            }
+        }
+
+
+        /* =========================================
+           BRAND
+        ========================================= */
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .brand-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 16px;
+
+            background:
+
+                linear-gradient(135deg,
+                    #7657ff,
+                    #4779ff,
+                    #00cfff);
+
+            font-size: 27px;
+
+            box-shadow:
+
+                0 0 20px rgba(0, 217, 255, .30),
+
+                0 10px 25px rgba(72, 101, 255, .30);
+        }
+
+
+        h1 {
+
+            color:
+                var(--text);
+
+            font-size:
+                1.62rem;
+
+            line-height:
+                1.2;
+
+            letter-spacing:
+                -.04em;
+        }
+
+
+        h2 {
+
+            margin:
+                7px 0 30px 65px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                .95rem;
+
+            font-weight:
+                400;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        form {
+            width: 100%;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin:
+                18px 0 8px;
+
+            color:
+                #39445b;
+
+            font-size:
+                .88rem;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =========================================
+           INPUT WRAPPER
+        ========================================= */
+
+        .input-box {
+
+            position: relative;
+
+            border-radius: 14px;
+
+            padding: 1px;
+
+            background:
+
+                linear-gradient(90deg,
+                    #00e5ff,
+                    #4779ff,
+                    #7657ff,
+                    #00e5ff);
+
+            background-size:
+                300% 100%;
+
+            animation:
+                inputBorder 5s linear infinite;
+
+            box-shadow:
+
+                0 0 10px rgba(0, 229, 255, .12);
+        }
+
+
+        @keyframes inputBorder {
+
+            0% {
+                background-position:
+                    0% 50%;
+            }
+
+            100% {
+                background-position:
+                    300% 50%;
+            }
+        }
+
+
+        /* =========================================
+           INPUT
+        ========================================= */
+
+        input {
+
+            display: block;
+
+            width: 100%;
+
+            padding:
+                14px 15px 14px 45px;
+
+            border:
+                none;
+
+            border-radius:
+                13px;
+
+            outline:
+                none;
+
+            background:
+                #ffffff;
+
+            color:
+                var(--text);
+
+            font-size:
+                .97rem;
+
+            transition:
+                .25s ease;
+        }
+
+
+        input::placeholder {
+
+            color:
+                #9aa3b5;
+        }
+
+
+        input:focus {
+
+            background:
+                #faffff;
+
+            box-shadow:
+
+                inset 0 0 15px rgba(0, 229, 255, .08),
+
+                0 0 18px rgba(0, 229, 255, .20);
+        }
+
+
+        /* =========================================
+           INPUT ICON
+        ========================================= */
+
+        .input-icon {
+
+            position: absolute;
+
+            z-index: 2;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                #00aeca;
+
+            font-size:
+                17px;
+
+            pointer-events:
+                none;
+
+            filter:
+                drop-shadow(0 0 5px rgba(0, 229, 255, .45));
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+        ========================================= */
+
+        button {
+
+            width: 100%;
+
+            margin-top: 27px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+
+                linear-gradient(135deg,
+                    #7657ff,
+                    #4779ff,
+                    #00bfff);
+
+            background-size:
+                200% 200%;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+            font-weight: 700;
+
+            letter-spacing: .2px;
+
+            box-shadow:
+
+                0 10px 25px rgba(76, 93, 255, .30),
+
+                0 0 25px rgba(0, 191, 255, .22);
+
+            transition:
+                .25s ease;
+        }
+
+
+        button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background-position:
+                100% 50%;
+
+            box-shadow:
+
+                0 14px 30px rgba(76, 93, 255, .42),
+
+                0 0 40px rgba(0, 191, 255, .32);
+        }
+
+
+        button:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================================
+           REGISTER
+        ========================================= */
+
+        .register-text {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            color:
+                var(--muted);
+
+            font-size:
+                .9rem;
+        }
+
+
+        a {
+
+            color:
+                #6755ed;
+
+            font-weight:
+                700;
+
+            text-decoration:
+                none;
+
+            transition:
+                .2s;
+        }
+
+
+        a:hover {
+
+            color:
+                #00a9df;
+
+            text-decoration:
+                underline;
+
+            text-shadow:
+                0 0 8px rgba(0, 229, 255, .35);
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 640px) {
+
+            body {
+                padding: 16px;
+            }
+
+
+            .login-card {
+
+                padding:
+                    30px 24px;
+
+                border-radius:
+                    23px;
+            }
+
+
+            .login-card::before {
+                border-radius:
+                    23px;
+            }
+
+
+            .brand-icon {
+
+                width:
+                    46px;
+
+                height:
+                    46px;
+
+                font-size:
+                    23px;
+            }
+
+
+            h1 {
+
+                font-size:
+                    1.30rem;
+            }
+
+
+            h2 {
+
+                margin-left:
+                    59px;
+
+                margin-bottom:
+                    25px;
+            }
+
+
+            .ai-object {
+
+                width:
+                    75px;
+
+                height:
+                    75px;
+
+                font-size:
+                    28px;
+
+                opacity:
+                    .5;
+            }
+
+
+            .network {
+
+                width:
+                    350px;
+
+                opacity:
+                    .12;
+            }
+        }
+
+
+        @media (max-width: 400px) {
+
+            .login-card {
+
+                padding:
+                    25px 19px;
+            }
+
+
+            h1 {
+
+                font-size:
+                    1.15rem;
+            }
+
+
+            h2 {
+
+                margin-left:
+                    55px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         AI BACKGROUND
+    ========================================== -->
+
+    <div class="ai-background">
+
+
+        <!-- Neon blurred lights -->
+
+        <div class="glow one"></div>
+
+        <div class="glow two"></div>
+
+        <div class="glow three"></div>
+
+        <div class="glow four"></div>
+
+
+        <!-- Floating AI symbols -->
+
+        <div class="ai-object one">
+            ✦
+        </div>
+
+        <div class="ai-object two">
+            ◈
+        </div>
+
+        <div class="ai-object three">
+            ⌁
+        </div>
+
+        <div class="ai-object four">
+            ✧
+        </div>
+
+
+        <!-- Neural network -->
+
+        <div class="network">
+
+            <span class="node"></span>
+            <span class="node"></span>
+            <span class="node"></span>
+            <span class="node"></span>
+            <span class="node"></span>
+            <span class="node"></span>
+            <span class="node"></span>
+
+            <span class="connection c1"></span>
+            <span class="connection c2"></span>
+            <span class="connection c3"></span>
+            <span class="connection c4"></span>
+            <span class="connection c5"></span>
+
+        </div>
+
+
+        <!-- Particles -->
+
+        <span class="particle p1"></span>
+        <span class="particle p2"></span>
+        <span class="particle p3"></span>
+        <span class="particle p4"></span>
+        <span class="particle p5"></span>
+        <span class="particle p6"></span>
+
+
+    </div>
+
+
+    <!-- =========================================
+         LOGIN CARD
+    ========================================== -->
+
+    <section class="login-card">
+
+
+        <!-- Header -->
+
+        <div class="brand">
+
+
+            <div class="brand-icon">
+                🤖
+            </div>
+
+
+            <h1 id="login-title">
+                AI Resume Screening System
+            </h1>
+
+
+        </div>
+
+
+        <h2>
+            Welcome back! Sign in to continue
+        </h2>
+
+
+        <!-- FORM -->
+
+        <form method="POST">
+
+
+            <!-- EMAIL -->
+
+            <label for="email">
+                Email
+            </label>
+
+
+            <div class="input-box">
+
+
+                <span class="input-icon">
+                    ✉
+                </span>
+
+
+                <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email"
+                    required>
+
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <label for="password">
+                Password
+            </label>
+
+
+            <div class="input-box">
+
+
+                <span class="input-icon">
+                    🔒
+                </span>
+
+
+                <input type="password" id="password" name="password" placeholder="Enter your password"
+                    autocomplete="current-password" required>
+
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button type="submit">
+                Login
+            </button>
+
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <p class="register-text">
+
+            Don't have an account?
+
+            <a href="/register">
+                Register Here
+            </a>
+
+        </p>
+
+
+    </section>
+
+
+</body>
+
+</html>
