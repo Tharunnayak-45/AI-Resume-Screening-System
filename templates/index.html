@@ -4,32 +4,57 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AI Resume Screening System</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 
     <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #050816;
-            color: white;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* =========================
-           HERO SECTION
-        ========================= */
+        body {
+            font-family: "Inter", Arial, sans-serif;
+            background: #030712;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
 
         .hero {
             min-height: 100vh;
@@ -37,56 +62,596 @@
             overflow: hidden;
 
             background:
-                radial-gradient(circle at 15% 20%,
-                    rgba(59, 130, 246, 0.30),
-                    transparent 30%),
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(37, 99, 235, 0.22),
+                    transparent 30%
+                ),
 
-                radial-gradient(circle at 85% 30%,
-                    rgba(139, 92, 246, 0.30),
-                    transparent 30%),
+                radial-gradient(
+                    circle at 90% 15%,
+                    rgba(124, 58, 237, 0.20),
+                    transparent 30%
+                ),
 
-                radial-gradient(circle at 50% 90%,
-                    rgba(14, 165, 233, 0.15),
-                    transparent 35%),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(6, 182, 212, 0.12),
+                    transparent 35%
+                ),
 
-                #050816;
+                #030712;
         }
 
-        /* Blurred AI background */
-        .ai-background {
+
+        /* =====================================================
+           GRID BACKGROUND
+        ===================================================== */
+
+        .grid-background {
             position: absolute;
             inset: 0;
-            opacity: 0.30;
-            filter: blur(5px);
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black 0%,
+                transparent 90%
+            );
+
             pointer-events: none;
         }
 
-        .resume-card {
+
+        /* =====================================================
+           BACKGROUND ORBS
+        ===================================================== */
+
+        .orb {
             position: absolute;
-            width: 300px;
-            height: 390px;
-            padding: 25px;
 
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
+            border-radius: 50%;
 
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(15px);
+            filter: blur(90px);
 
-            transform: rotate(-12deg);
+            pointer-events: none;
 
-            top: 18%;
-            right: 12%;
+            animation: floatOrb 8s ease-in-out infinite;
         }
 
-        .resume-line {
-            height: 10px;
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+
+            background: rgba(37, 99, 235, 0.15);
+
+            top: 15%;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+
+            background: rgba(124, 58, 237, 0.13);
+
+            right: -120px;
+            top: 20%;
+
+            animation-delay: 2s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+
+            background: rgba(6, 182, 212, 0.10);
+
+            bottom: -80px;
+            left: 40%;
+
+            animation-delay: 4s;
+        }
+
+        @keyframes floatOrb {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar-custom {
+            position: relative;
+            z-index: 100;
+
+            padding: 20px 0;
+
+            background: rgba(3, 7, 18, 0.60);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            color: #ffffff;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+        }
+
+        .brand:hover {
+            color: #ffffff;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 10px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 10px 30px rgba(37, 99, 235, 0.35);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+
+            gap: 28px;
+        }
+
+        .nav-link-custom {
+            color: #94a3b8;
+
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: 0.3s;
+        }
+
+        .nav-link-custom:hover {
+            color: #ffffff;
+        }
+
+
+        /* =====================================================
+           NAV BUTTONS
+        ===================================================== */
+
+        .btn-nav-login {
+            padding: 10px 18px;
+
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.25);
+
+            color: #ffffff;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            background: rgba(255, 255, 255, 0.04);
+
+            transition: 0.3s;
+        }
+
+        .btn-nav-login:hover {
+            color: #ffffff;
+
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .btn-nav-start {
+            padding: 10px 20px;
+
+            border-radius: 10px;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            border: none;
+
+            box-shadow:
+                0 8px 25px rgba(37, 99, 235, 0.25);
+
+            transition: 0.3s;
+        }
+
+        .btn-nav-start:hover {
+            color: #ffffff;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 35px rgba(37, 99, 235, 0.35);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+
+        /* =====================================================
+           HERO CONTENT
+        ===================================================== */
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+
+            min-height: calc(100vh - 83px);
+
+            display: flex;
+            align-items: center;
+
+            padding: 80px 0;
+        }
+
+        .hero-left {
+            padding-right: 35px;
+        }
+
+
+        /* =====================================================
+           HERO BADGE
+        ===================================================== */
+
+        .badge-ai {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 9px 16px;
+
+            margin-bottom: 28px;
+
+            border-radius: 50px;
+
+            background: rgba(37, 99, 235, 0.08);
+
+            border: 1px solid rgba(96, 165, 250, 0.20);
+
+            color: #93c5fd;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+        }
+
+        .badge-ai i {
+            color: #60a5fa;
+        }
+
+
+        /* =====================================================
+           HERO TITLE
+        ===================================================== */
+
+        .hero-title {
+            max-width: 850px;
+
+            font-size: clamp(48px, 6vw, 80px);
+
+            line-height: 1.03;
+
+            font-weight: 900;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 28px;
+        }
+
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #60a5fa,
+                    #8b5cf6,
+                    #22d3ee
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        /* =====================================================
+           HERO DESCRIPTION
+        ===================================================== */
+
+        .hero-description {
+            max-width: 670px;
+
+            color: #94a3b8;
+
+            font-size: 18px;
+
+            line-height: 1.75;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* =====================================================
+           MAIN BUTTONS
+        ===================================================== */
+
+        .btn-start {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 15px 25px;
+
+            border-radius: 12px;
+
+            border: none;
+
+            color: #ffffff;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 12px 35px rgba(37, 99, 235, 0.30);
+
+            transition: 0.3s;
+        }
+
+        .btn-start:hover {
+            color: #ffffff;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 18px 45px rgba(37, 99, 235, 0.40);
+        }
+
+        .btn-login {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 15px 25px;
+
+            border-radius: 12px;
+
+            color: #ffffff;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            background: rgba(255, 255, 255, 0.04);
+
+            backdrop-filter: blur(10px);
+
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            color: #ffffff;
+
+            background: rgba(255, 255, 255, 0.09);
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =====================================================
+           HERO FEATURES
+        ===================================================== */
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 20px;
+
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 9px;
+
+            border-radius: 10px;
+
+            color: #60a5fa;
+
+            background: rgba(59, 130, 246, 0.10);
+
+            border: 1px solid rgba(96, 165, 250, 0.10);
+        }
+
+
+        /* =====================================================
+           HERO STATS
+        ===================================================== */
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 35px;
+
+            margin-top: 45px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: 23px;
+
+            font-weight: 800;
+
+            color: #ffffff;
+        }
+
+        .stat-label {
+            margin-top: 3px;
+
+            color: #64748b;
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           AI VISUAL
+        ===================================================== */
+
+        .ai-visual {
+            position: relative;
+
+            width: 100%;
+
+            height: 570px;
+        }
+
+
+        /* =====================================================
+           MINI RESUME
+        ===================================================== */
+
+        .resume-mini {
+            position: absolute;
+
+            width: 180px;
+
+            padding: 16px;
+
+            top: 20px;
+            left: 0;
+
+            border-radius: 16px;
+
+            background: rgba(15, 23, 42, 0.70);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(20px);
+
+            transform: rotate(-8deg);
+
+            opacity: 0.85;
+        }
+
+        .resume-top {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
             margin-bottom: 15px;
         }
 
-        .resume-line.small {
+        .resume-avatar {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+        }
+
+        .resume-lines {
+            flex: 1;
+        }
+
+        .resume-line {
+            height: 6px;
+
+            margin-bottom: 6px;
+
+            border-radius: 10px;
+
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .resume-line.short {
             width: 60%;
         }
 
@@ -94,214 +659,318 @@
             width: 80%;
         }
 
-        .skill-box {
-            display: inline-block;
-            padding: 7px 12px;
-            margin: 5px;
 
-            border-radius: 20px;
+        /* =====================================================
+           DASHBOARD CARD
+        ===================================================== */
 
-            background: rgba(59, 130, 246, 0.30);
-            color: #bfdbfe;
-            font-size: 12px;
+        .dashboard-card {
+            position: absolute;
+
+            width: 380px;
+
+            padding: 25px;
+
+            top: 55px;
+            right: 15px;
+
+            border-radius: 22px;
+
+            background: rgba(15, 23, 42, 0.72);
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+
+            backdrop-filter: blur(25px);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.45);
+
+            transform: rotate(2deg);
+
+            animation: dashboardFloat 6s ease-in-out infinite;
         }
+
+        @keyframes dashboardFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(2deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(2deg);
+            }
+        }
+
+
+        /* Dashboard Header */
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+        .dashboard-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .online {
+            display: flex;
+            align-items: center;
+
+            gap: 6px;
+
+            color: #4ade80;
+
+            font-size: 10px;
+        }
+
+        .online-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #4ade80;
+
+            box-shadow: 0 0 10px #4ade80;
+        }
+
+
+        /* Score */
+
+        .score-section {
+            display: flex;
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+        }
+
+        .score-circle {
+            width: 105px;
+            height: 105px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #0f172a 55%,
+                    transparent 56%
+                );
+
+            border: 6px solid rgba(96, 165, 250, 0.20);
+
+            box-shadow:
+                inset 0 0 25px rgba(37, 99, 235, 0.10),
+                0 0 30px rgba(37, 99, 235, 0.10);
+        }
+
+        .score-number {
+            font-size: 25px;
+            font-weight: 800;
+
+            color: #60a5fa;
+        }
+
+        .score-label {
+            color: #64748b;
+
+            font-size: 9px;
+        }
+
+        .score-info h6 {
+            margin-bottom: 7px;
+
+            font-size: 14px;
+        }
+
+        .score-info p {
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* Skills */
+
+        .skill-title {
+            margin-bottom: 10px;
+
+            color: #94a3b8;
+
+            font-size: 10px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 7px;
+        }
+
+        .skill-tag {
+            padding: 6px 10px;
+
+            border-radius: 7px;
+
+            color: #bfdbfe;
+
+            background: rgba(59, 130, 246, 0.10);
+
+            border: 1px solid rgba(96, 165, 250, 0.10);
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           AI CARD
+        ===================================================== */
 
         .ai-card {
             position: absolute;
 
-            width: 250px;
-            padding: 22px;
+            width: 230px;
+
+            padding: 20px;
+
+            left: 10px;
+            bottom: 100px;
+
+            border-radius: 18px;
+
+            background: rgba(15, 23, 42, 0.80);
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.40);
+
+            transform: rotate(-6deg);
+
+            animation: aiFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes aiFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-6deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(-6deg);
+            }
+        }
+
+        .ai-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 14px;
+
+            border-radius: 12px;
+
+            color: #67e8f9;
+
+            background: rgba(6, 182, 212, 0.10);
+        }
+
+        .ai-card h6 {
+            margin-bottom: 12px;
+
+            font-size: 13px;
+        }
+
+        .progress {
+            height: 7px;
+
+            overflow: hidden;
 
             border-radius: 20px;
 
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-
-            backdrop-filter: blur(15px);
-
-            right: 35%;
-            bottom: 18%;
-
-            transform: rotate(8deg);
         }
+
+        .progress-bar {
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #06b6d4,
+                    #3b82f6
+                );
+        }
+
+
+        /* =====================================================
+           JOB CARD
+        ===================================================== */
 
         .job-card {
             position: absolute;
 
-            width: 230px;
+            width: 220px;
+
             padding: 20px;
 
-            border-radius: 20px;
+            right: -5px;
+            bottom: 25px;
 
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
 
-            backdrop-filter: blur(15px);
+            background: rgba(15, 23, 42, 0.80);
 
-            right: 5%;
-            bottom: 8%;
+            border: 1px solid rgba(255, 255, 255, 0.10);
 
-            transform: rotate(-5deg);
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.40);
+
+            transform: rotate(5deg);
+
+            animation: jobFloat 6s ease-in-out infinite;
         }
 
-        /* =========================
-           NAVBAR
-        ========================= */
+        @keyframes jobFloat {
 
-        .navbar-custom {
-            position: relative;
-            z-index: 10;
+            0%,
+            100% {
+                transform: translateY(0) rotate(5deg);
+            }
 
-            padding: 20px 0;
-
-            background: rgba(5, 8, 22, 0.55);
-            backdrop-filter: blur(15px);
-
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            50% {
+                transform: translateY(-12px) rotate(5deg);
+            }
         }
 
-        .brand {
-            font-size: 22px;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-        }
-
-        .brand i {
-            color: #60a5fa;
-        }
-
-        .nav-link-custom {
-            color: #cbd5e1;
-            text-decoration: none;
-            margin-right: 25px;
-            transition: 0.3s;
-        }
-
-        .nav-link-custom:hover {
-            color: white;
-        }
-
-        /* =========================
-           HERO CONTENT
-        ========================= */
-
-        .hero-content {
-            position: relative;
-            z-index: 5;
-
-            min-height: calc(100vh - 85px);
-
-            display: flex;
-            align-items: center;
-        }
-
-        .badge-ai {
-            display: inline-block;
-
-            padding: 9px 17px;
-
-            border-radius: 30px;
-
-            background: rgba(59, 130, 246, 0.12);
-            border: 1px solid rgba(96, 165, 250, 0.30);
-
-            color: #93c5fd;
-
-            font-size: 14px;
-            font-weight: 600;
-
-            margin-bottom: 25px;
-        }
-
-        .hero-title {
-            font-size: clamp(45px, 6vw, 78px);
-            line-height: 1.05;
-            font-weight: 800;
-            letter-spacing: -3px;
-
-            margin-bottom: 25px;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg,
-                    #60a5fa,
-                    #a78bfa,
-                    #22d3ee);
-
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-description {
-            max-width: 650px;
-
-            font-size: 19px;
-            line-height: 1.7;
-
-            color: #94a3b8;
-
-            margin-bottom: 35px;
-        }
-
-        .btn-start {
-            padding: 14px 28px;
-
-            border-radius: 12px;
-
-            background: linear-gradient(90deg,
-                    #2563eb,
-                    #7c3aed);
-
-            border: none;
-
-            color: white;
-            font-weight: 600;
-
-            box-shadow: 0 10px 35px rgba(37, 99, 235, 0.30);
-        }
-
-        .btn-start:hover {
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .btn-login {
-            padding: 14px 28px;
-
-            border-radius: 12px;
-
-            border: 1px solid rgba(255, 255, 255, 0.15);
-
-            color: white;
-
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .btn-login:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        /* =========================
-           FEATURES
-        ========================= */
-
-        .features {
-            margin-top: 65px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-
-            margin-bottom: 18px;
-
-            color: #cbd5e1;
-        }
-
-        .feature-icon {
+        .job-card-icon {
             width: 40px;
             height: 40px;
 
@@ -309,60 +978,691 @@
             align-items: center;
             justify-content: center;
 
-            margin-right: 12px;
+            margin-bottom: 14px;
 
             border-radius: 10px;
 
-            background: rgba(59, 130, 246, 0.12);
+            color: #fbbf24;
+
+            background: rgba(251, 191, 36, 0.10);
+        }
+
+        .job-card h6 {
+            margin-bottom: 10px;
+
+            font-size: 13px;
+        }
+
+        .job-item {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 0;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+            color: #94a3b8;
+
+            font-size: 10px;
+        }
+
+        .job-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-item i {
             color: #60a5fa;
         }
 
-        /* =========================
+
+        /* =====================================================
+           FEATURES SECTION
+        ===================================================== */
+
+        .features-section {
+            position: relative;
+
+            padding: 110px 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(37, 99, 235, 0.08),
+                    transparent 40%
+                ),
+
+                #020617;
+        }
+
+        .section-heading {
+            max-width: 750px;
+
+            margin: auto;
+
+            text-align: center;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 8px 14px;
+
+            border-radius: 50px;
+
+            color: #93c5fd;
+
+            background: rgba(59, 130, 246, 0.08);
+
+            border: 1px solid rgba(96, 165, 250, 0.15);
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+        }
+
+        .section-heading h2 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            font-size: clamp(35px, 5vw, 55px);
+
+            line-height: 1.1;
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+        }
+
+        .section-heading p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #64748b;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+
+        /* Feature Cards */
+
+        .feature-card {
+            position: relative;
+
+            height: 100%;
+
+            padding: 32px;
+
+            overflow: hidden;
+
+            border-radius: 22px;
+
+            background: rgba(15, 23, 42, 0.65);
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+
+            backdrop-filter: blur(15px);
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .feature-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            top: -100px;
+            right: -80px;
+
+            border-radius: 50%;
+
+            background: rgba(59, 130, 246, 0.10);
+
+            filter: blur(40px);
+
+            transition: 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(96, 165, 250, 0.20);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.30);
+        }
+
+        .feature-card:hover::before {
+            transform: scale(2);
+        }
+
+
+        /* Feature Icon */
+
+        .feature-card-icon {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 24px;
+
+            border-radius: 15px;
+
+            font-size: 23px;
+        }
+
+        .blue {
+            color: #60a5fa;
+
+            background: rgba(59, 130, 246, 0.10);
+        }
+
+        .purple {
+            color: #a78bfa;
+
+            background: rgba(139, 92, 246, 0.10);
+        }
+
+        .cyan {
+            color: #22d3ee;
+
+            background: rgba(6, 182, 212, 0.10);
+        }
+
+        .green {
+            color: #4ade80;
+
+            background: rgba(34, 197, 94, 0.10);
+        }
+
+        .orange {
+            color: #fb923c;
+
+            background: rgba(249, 115, 22, 0.10);
+        }
+
+        .pink {
+            color: #f472b6;
+
+            background: rgba(236, 72, 153, 0.10);
+        }
+
+
+        /* Feature Content */
+
+        .feature-card h4 {
+            margin-bottom: 13px;
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            margin-bottom: 25px;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .feature-link {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            color: #93c5fd;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        .feature-link i {
+            transition: 0.3s;
+        }
+
+        .feature-card:hover .feature-link i {
+            transform: translateX(5px);
+        }
+
+
+        /* =====================================================
+           HOW IT WORKS
+        ===================================================== */
+
+        .how-section {
+            padding: 110px 0;
+
+            background: #030712;
+        }
+
+        .step-card {
+            position: relative;
+
+            height: 100%;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.025);
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+
+            transition: 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-6px);
+
+            background: rgba(255, 255, 255, 0.04);
+
+            border-color:
+                rgba(96, 165, 250, 0.18);
+        }
+
+        .step-number {
+            position: absolute;
+
+            top: 20px;
+            right: 22px;
+
+            color: rgba(255, 255, 255, 0.08);
+
+            font-size: 40px;
+
+            font-weight: 900;
+        }
+
+        .step-icon {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 15px;
+
+            color: #60a5fa;
+
+            background: rgba(59, 130, 246, 0.10);
+
+            font-size: 22px;
+        }
+
+        .step-card h4 {
+            margin-bottom: 12px;
+
+            font-size: 18px;
+        }
+
+        .step-card p {
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           CONTACT SECTION
+        ===================================================== */
+
+        .contact-section {
+            padding: 110px 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(37, 99, 235, 0.08),
+                    transparent 40%
+                ),
+
+                #020617;
+        }
+
+        .contact-card {
+            height: 100%;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            background: rgba(15, 23, 42, 0.65);
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+
+            backdrop-filter: blur(15px);
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(96, 165, 250, 0.20);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.30);
+        }
+
+        .contact-icon {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 15px;
+
+            color: #60a5fa;
+
+            background: rgba(59, 130, 246, 0.10);
+
+            font-size: 22px;
+        }
+
+        .contact-card h5 {
+            margin-bottom: 10px;
+
+            color: #ffffff;
+
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .contact-card a {
+            color: #93c5fd;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: #ffffff;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta-section {
+            padding: 100px 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(37, 99, 235, 0.15),
+                    transparent 50%
+                ),
+
+                #020617;
+        }
+
+        .cta-box {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 65px 30px;
+
+            border-radius: 28px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.10),
+                    rgba(124, 58, 237, 0.10)
+                );
+
+            border: 1px solid rgba(96, 165, 250, 0.12);
+        }
+
+        .cta-box h2 {
+            margin-bottom: 18px;
+
+            font-size: clamp(32px, 5vw, 48px);
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+        }
+
+        .cta-box p {
+            max-width: 600px;
+
+            margin: 0 auto 30px;
+
+            color: #64748b;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            padding: 30px 0;
+
+            background: #020617;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+        .footer a {
+            color: #64748b;
+
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: #93c5fd;
+        }
+
+
+        /* =====================================================
            RESPONSIVE
-        ========================= */
+        ===================================================== */
+
+        @media (max-width: 1199px) {
+
+            .dashboard-card {
+                right: 0;
+            }
+
+            .ai-card {
+                left: 0;
+            }
+
+            .job-card {
+                right: -10px;
+            }
+
+        }
+
 
         @media (max-width: 991px) {
 
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content {
+                padding-top: 70px;
+                padding-bottom: 100px;
+            }
+
+            .hero-left {
+                padding-right: 0;
+            }
+
             .hero-title {
-                font-size: 52px;
+                font-size: 58px;
             }
 
-            .ai-background {
-                opacity: 0.18;
+            .ai-visual {
+                height: 500px;
+
+                margin-top: 60px;
             }
 
-            .resume-card {
-                right: -80px;
+            .dashboard-card {
+                right: 50px;
             }
 
         }
+
 
         @media (max-width: 767px) {
 
+            .navbar-custom {
+                padding: 15px 0;
+            }
+
+            .brand {
+                font-size: 16px;
+            }
+
+            .brand-icon {
+                width: 38px;
+                height: 38px;
+            }
+
             .hero-content {
-                padding: 70px 0;
+                padding-top: 60px;
             }
 
             .hero-title {
-                font-size: 45px;
-                letter-spacing: -2px;
+                font-size: 44px;
+
+                letter-spacing: -2.5px;
             }
 
             .hero-description {
-                font-size: 17px;
+                font-size: 16px;
+
+                line-height: 1.7;
             }
 
-            .nav-link-custom {
+            .features {
+                flex-direction: column;
+
+                gap: 14px;
+            }
+
+            .stats {
+                gap: 25px;
+            }
+
+            .ai-visual {
                 display: none;
             }
 
-            .resume-card,
-            .ai-card,
-            .job-card {
-                display: none;
+            .btn-start,
+            .btn-login {
+                width: 100%;
+            }
+
+            .features-section,
+            .how-section,
+            .contact-section {
+                padding: 80px 0;
+            }
+
+            .section-heading h2 {
+                font-size: 36px;
+            }
+
+            .feature-card {
+                padding: 26px;
             }
 
         }
+
+
+        @media (max-width: 450px) {
+
+            .hero-title {
+                font-size: 38px;
+            }
+
+            .badge-ai {
+                font-size: 10px;
+            }
+
+            .stats {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .mobile-menu .btn {
+                font-size: 11px;
+            }
+
+        }
+
     </style>
 
 </head>
@@ -371,106 +1671,24 @@
 <body>
 
 
-    <!-- =========================
-     HERO
-========================= -->
+    <!-- =====================================================
+         HERO SECTION
+    ===================================================== -->
 
     <section class="hero">
 
+        <!-- Background -->
 
-        <!-- Blurred AI Background -->
+        <div class="grid-background"></div>
 
-        <div class="ai-background">
-
-
-            <!-- Resume -->
-            <div class="resume-card">
-
-                <div class="d-flex align-items-center mb-4">
-
-                    <i class="bi bi-person-circle fs-1 text-primary me-3"></i>
-
-                    <div>
-
-                        <div class="resume-line medium"></div>
-                        <div class="resume-line small"></div>
-
-                    </div>
-
-                </div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
 
 
-                <div class="resume-line medium"></div>
-                <div class="resume-line"></div>
-                <div class="resume-line small"></div>
-
-                <div class="mt-4">
-
-                    <span class="skill-box">Python</span>
-                    <span class="skill-box">Java</span>
-                    <span class="skill-box">SQL</span>
-                    <span class="skill-box">Machine Learning</span>
-                    <span class="skill-box">Flask</span>
-
-                </div>
-
-            </div>
-
-
-            <!-- AI Analysis -->
-            <div class="ai-card">
-
-                <i class="bi bi-cpu fs-2 text-info"></i>
-
-                <h5 class="mt-3">
-                    AI Analysis
-                </h5>
-
-                <div class="progress mt-3" style="height: 8px;">
-
-                    <div class="progress-bar bg-info" style="width: 86%;">
-
-                    </div>
-
-                </div>
-
-                <small class="text-light">
-                    Resume Match: 86%
-                </small>
-
-            </div>
-
-
-            <!-- Job Recommendation -->
-            <div class="job-card">
-
-                <i class="bi bi-briefcase fs-3 text-warning"></i>
-
-                <h6 class="mt-3">
-                    Job Recommendation
-                </h6>
-
-                <p class="small text-secondary mb-0">
-                    Software Engineer
-                </p>
-
-                <p class="small text-secondary mb-0">
-                    Python Developer
-                </p>
-
-                <p class="small text-secondary">
-                    Full Stack Developer
-                </p>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- =========================
-         NAVBAR
-    ========================= -->
+        <!-- =================================================
+             NAVBAR
+        ================================================= -->
 
         <nav class="navbar-custom">
 
@@ -479,37 +1697,86 @@
                 <div class="d-flex align-items-center justify-content-between">
 
 
-                    <!-- Logo -->
+                    <!-- Brand -->
 
                     <a href="{{ url_for('home') }}" class="brand">
 
-                        <i class="bi bi-robot me-2"></i>
+                        <span class="brand-icon">
+
+                            <i class="bi bi-robot"></i>
+
+                        </span>
 
                         AI Resume Screening
 
                     </a>
 
 
-                    <!-- Navigation -->
+                    <!-- Desktop Menu -->
 
-                    <div class="d-flex align-items-center">
+                    <div class="nav-links">
 
-                        
+                        <a href="#features"
+                            class="nav-link-custom">
 
-                        <a href="{{ url_for('login') }}" class="btn btn-outline-light me-2">
+                            Features
+
+                        </a>
+
+                        <a href="#how-it-works"
+                            class="nav-link-custom">
+
+                            How It Works
+
+                        </a>
+
+                        <!-- CONTACT NAVBAR LINK -->
+
+                        <a href="#contact"
+                            class="nav-link-custom">
+
+                            Contact
+
+                        </a>
+
+                        <a href="{{ url_for('login') }}"
+                            class="btn-nav-login">
 
                             Login
 
                         </a>
 
-                        <a href="{{ url_for('register') }}" class="btn btn-primary">
+                        <a href="{{ url_for('register') }}"
+                            class="btn-nav-start">
 
                             Get Started
+
+                            <i class="bi bi-arrow-up-right ms-1"></i>
 
                         </a>
 
                     </div>
 
+
+                    <!-- Mobile Menu -->
+
+                    <div class="mobile-menu">
+
+                        <a href="{{ url_for('login') }}"
+                            class="btn btn-sm btn-outline-light me-1">
+
+                            Login
+
+                        </a>
+
+                        <a href="{{ url_for('register') }}"
+                            class="btn btn-sm btn-primary">
+
+                            Start
+
+                        </a>
+
+                    </div>
 
                 </div>
 
@@ -518,120 +1785,406 @@
         </nav>
 
 
-        <!-- =========================
-         HERO CONTENT
-    ========================= -->
+        <!-- =================================================
+             HERO CONTENT
+        ================================================= -->
 
         <div class="hero-content">
 
             <div class="container">
 
-                <div class="row">
-
-                    <div class="col-lg-8">
+                <div class="row align-items-center">
 
 
-                        <span class="badge-ai">
+                    <!-- LEFT CONTENT -->
 
-                            <i class="bi bi-stars me-2"></i>
+                    <div class="col-lg-7">
 
-                            AI-Powered Recruitment Platform
-
-                        </span>
+                        <div class="hero-left">
 
 
-                        <h1 class="hero-title">
+                            <!-- Badge -->
 
-                            Find the right career
-                            with
+                            <span class="badge-ai">
 
-                            <span class="gradient-text">
+                                <i class="bi bi-stars me-2"></i>
 
-                                AI.
+                                AI-POWERED RECRUITMENT PLATFORM
 
                             </span>
 
-                        </h1>
+
+                            <!-- Title -->
+
+                            <h1 class="hero-title">
+
+                                Turn your resume into your
+
+                                <span class="gradient-text">
+
+                                    next opportunity.
+
+                                </span>
+
+                            </h1>
 
 
-                        <p class="hero-description">
+                            <!-- Description -->
 
-                            Upload your resume and let our
-                            AI-powered system analyze your
-                            skills, experience, and profile to
-                            discover relevant career opportunities.
+                            <p class="hero-description">
 
-                        </p>
+                                Upload your resume and let our
+                                intelligent screening system analyze
+                                your skills, experience, education,
+                                and profile to discover relevant
+                                career opportunities.
 
-
-                        <!-- Buttons -->
-
-                        <div class="d-flex flex-wrap gap-3">
-
-                            <a href="{{ url_for('register') }}" class="btn btn-start btn-lg">
-
-                                Get Started
-
-                                <i class="bi bi-arrow-right ms-2"></i>
-
-                            </a>
+                            </p>
 
 
-                            <a href="{{ url_for('login') }}" class="btn btn-login btn-lg">
+                            <!-- Buttons -->
 
-                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                            <div class="d-flex flex-wrap gap-3">
 
-                                Login
+                                <a href="{{ url_for('register') }}"
+                                    class="btn-start">
 
-                            </a>
+                                    Get Started
 
-                        </div>
+                                    <i class="bi bi-arrow-right ms-2"></i>
+
+                                </a>
 
 
-                        <!-- Features -->
+                                <a href="{{ url_for('login') }}"
+                                    class="btn-login">
 
-                        <div class="features" id="features">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>
 
-                            <div class="feature-item">
+                                    Login
 
-                                <div class="feature-icon">
-
-                                    <i class="bi bi-file-earmark-text"></i>
-
-                                </div>
-
-                                Resume Analysis
+                                </a>
 
                             </div>
 
 
-                            <div class="feature-item">
+                            <!-- Small Features -->
 
-                                <div class="feature-icon">
+                            <div class="features">
+
+                                <div class="feature-item">
+
+                                    <span class="feature-icon">
+
+                                        <i class="bi bi-file-earmark-text"></i>
+
+                                    </span>
+
+                                    Resume Analysis
+
+                                </div>
+
+
+                                <div class="feature-item">
+
+                                    <span class="feature-icon">
+
+                                        <i class="bi bi-cpu"></i>
+
+                                    </span>
+
+                                    AI Skill Detection
+
+                                </div>
+
+
+                                <div class="feature-item">
+
+                                    <span class="feature-icon">
+
+                                        <i class="bi bi-briefcase"></i>
+
+                                    </span>
+
+                                    Smart Job Matching
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Stats -->
+
+                            <div class="stats">
+
+                                <div class="stat">
+
+                                    <span class="stat-number">
+                                        AI
+                                    </span>
+
+                                    <span class="stat-label">
+                                        Powered Analysis
+                                    </span>
+
+                                </div>
+
+
+                                <div class="stat">
+
+                                    <span class="stat-number">
+                                        NLP
+                                    </span>
+
+                                    <span class="stat-label">
+                                        Resume Processing
+                                    </span>
+
+                                </div>
+
+
+                                <div class="stat">
+
+                                    <span class="stat-number">
+                                        24/7
+                                    </span>
+
+                                    <span class="stat-label">
+                                        Career Discovery
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RIGHT AI VISUAL -->
+
+                    <div class="col-lg-5">
+
+                        <div class="ai-visual">
+
+
+                            <!-- Resume Card -->
+
+                            <div class="resume-mini">
+
+                                <div class="resume-top">
+
+                                    <div class="resume-avatar">
+
+                                        <i class="bi bi-person"></i>
+
+                                    </div>
+
+                                    <div class="resume-lines">
+
+                                        <div class="resume-line"></div>
+
+                                        <div class="resume-line short"></div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="resume-line medium"></div>
+
+                                <div class="resume-line"></div>
+
+                                <div class="resume-line short"></div>
+
+                                <div class="resume-line"></div>
+
+                            </div>
+
+
+                            <!-- Dashboard -->
+
+                            <div class="dashboard-card">
+
+
+                                <div class="dashboard-header">
+
+                                    <div class="dashboard-title">
+
+                                        Resume Intelligence
+
+                                    </div>
+
+                                    <div class="online">
+
+                                        <span class="online-dot"></span>
+
+                                        AI Active
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Match Score -->
+
+                                <div class="score-section">
+
+
+                                    <div class="score-circle">
+
+                                        <span class="score-number">
+                                            86%
+                                        </span>
+
+                                        <span class="score-label">
+                                            MATCH
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="score-info">
+
+                                        <h6>
+                                            Strong Profile Match
+                                        </h6>
+
+                                        <p>
+                                            Skills and experience
+                                            analyzed successfully.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Skills -->
+
+                                <div class="skill-title">
+
+                                    DETECTED SKILLS
+
+                                </div>
+
+
+                                <div class="skill-tags">
+
+                                    <span class="skill-tag">
+                                        Python
+                                    </span>
+
+                                    <span class="skill-tag">
+                                        Java
+                                    </span>
+
+                                    <span class="skill-tag">
+                                        SQL
+                                    </span>
+
+                                    <span class="skill-tag">
+                                        Flask
+                                    </span>
+
+                                    <span class="skill-tag">
+                                        Machine Learning
+                                    </span>
+
+                                    <span class="skill-tag">
+                                        MySQL
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- AI Analysis -->
+
+                            <div class="ai-card">
+
+                                <div class="ai-icon">
 
                                     <i class="bi bi-cpu"></i>
 
                                 </div>
 
-                                AI Skill Detection
+                                <h6>
+                                    AI Resume Analysis
+                                </h6>
+
+                                <div class="progress mb-2">
+
+                                    <div class="progress-bar"
+                                        style="width: 86%;">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+
+                                    <small class="text-secondary">
+                                        Processing
+                                    </small>
+
+                                    <small class="text-info">
+                                        86%
+                                    </small>
+
+                                </div>
 
                             </div>
 
 
-                            <div class="feature-item">
+                            <!-- Jobs -->
 
-                                <div class="feature-icon">
+                            <div class="job-card">
+
+                                <div class="job-card-icon">
 
                                     <i class="bi bi-briefcase"></i>
 
                                 </div>
 
-                                Smart Job Recommendations
+                                <h6>
+                                    Recommended Jobs
+                                </h6>
+
+
+                                <div class="job-item">
+
+                                    <i class="bi bi-check-circle"></i>
+
+                                    Software Engineer
+
+                                </div>
+
+
+                                <div class="job-item">
+
+                                    <i class="bi bi-check-circle"></i>
+
+                                    Python Developer
+
+                                </div>
+
+
+                                <div class="job-item">
+
+                                    <i class="bi bi-check-circle"></i>
+
+                                    Full Stack Developer
+
+                                </div>
 
                             </div>
 
-                        </div>
 
+                        </div>
 
                     </div>
 
@@ -641,13 +2194,754 @@
 
         </div>
 
+    </section>
+
+
+    <!-- =====================================================
+         FEATURES SECTION
+    ===================================================== -->
+
+    <section class="features-section" id="features">
+
+        <div class="container">
+
+
+            <!-- Heading -->
+
+            <div class="section-heading">
+
+                <span class="section-badge">
+
+                    <i class="bi bi-stars me-2"></i>
+
+                    POWERFUL FEATURES
+
+                </span>
+
+
+                <h2>
+
+                    Everything you need to
+
+                    <span class="gradient-text">
+                        find the right job.
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Our AI-powered platform analyzes your resume,
+                    identifies your skills, and helps you discover
+                    job opportunities that match your profile.
+
+                </p>
+
+            </div>
+
+
+            <!-- Feature Cards -->
+
+            <div class="row g-4 mt-4">
+
+
+                <!-- 1 -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon blue">
+
+                            <i class="bi bi-file-earmark-text"></i>
+
+                        </div>
+
+                        <h4>
+                            Smart Resume Analysis
+                        </h4>
+
+                        <p>
+
+                            Upload your resume and let the system
+                            automatically extract your education,
+                            experience, skills, projects and
+                            other important information.
+
+                        </p>
+
+                        <div class="feature-link">
+
+                            Resume Analysis
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 2 -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon purple">
+
+                            <i class="bi bi-cpu"></i>
+
+                        </div>
+
+                        <h4>
+                            AI Skill Detection
+                        </h4>
+
+                        <p>
+
+                            The system identifies technical and
+                            professional skills from your resume
+                            and organizes them into a structured
+                            candidate profile.
+
+                        </p>
+
+                        <div class="feature-link">
+
+                            Detect Skills
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 3 -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon cyan">
+
+                            <i class="bi bi-briefcase"></i>
+
+                        </div>
+
+                        <h4>
+                            Smart Job Recommendations
+                        </h4>
+
+                        <p>
+
+                            Get job recommendations based on
+                            your detected skills, experience,
+                            qualifications and career profile.
+
+                        </p>
+
+                        <div class="feature-link">
+
+                            Find Jobs
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 4 -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon green">
+
+                            <i class="bi bi-bar-chart"></i>
+
+                        </div>
+
+                        <h4>
+                            Resume Match Score
+                        </h4>
+
+                        <p>
+
+                            Understand how closely your resume
+                            matches available job requirements
+                            through an easy-to-understand
+                            compatibility score.
+
+                        </p>
+
+                        <div class="feature-link">
+
+                            View Match
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 5 -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon orange">
+
+                            <i class="bi bi-search"></i>
+
+                        </div>
+
+                        <h4>
+                            Skill Gap Identification
+                        </h4>
+
+                        <p>
+
+                            Identify missing or underrepresented
+                            skills by comparing your profile
+                            with job requirements.
+
+                        </p>
+
+                        <div class="feature-link">
+
+                            Find Skill Gaps
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 6 -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon pink">
+
+                            <i class="bi bi-shield-check"></i>
+
+                        </div>
+
+                        <h4>
+                            Secure Resume Management
+                        </h4>
+
+                        <p>
+
+                            Manage your resume and profile through
+                            a secure account while keeping your
+                            career information organized.
+
+                        </p>
+
+                        <div class="feature-link">
+
+                            Manage Profile
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
 
     </section>
 
 
+    <!-- =====================================================
+         HOW IT WORKS
+    ===================================================== -->
+
+    <section class="how-section" id="how-it-works">
+
+        <div class="container">
+
+
+            <div class="section-heading">
+
+                <span class="section-badge">
+
+                    SIMPLE PROCESS
+
+                </span>
+
+                <h2>
+
+                    How it
+
+                    <span class="gradient-text">
+                        works.
+                    </span>
+
+                </h2>
+
+                <p>
+
+                    Start your career discovery journey
+                    in three simple steps.
+
+                </p>
+
+            </div>
+
+
+            <div class="row g-4 mt-4">
+
+
+                <!-- Step 1 -->
+
+                <div class="col-lg-4">
+
+                    <div class="step-card">
+
+                        <span class="step-number">
+                            01
+                        </span>
+
+                        <div class="step-icon">
+
+                            <i class="bi bi-cloud-upload"></i>
+
+                        </div>
+
+                        <h4>
+                            Upload Your Resume
+                        </h4>
+
+                        <p>
+
+                            Create your account and upload
+                            your resume. The system processes
+                            the document and extracts relevant
+                            candidate information.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Step 2 -->
+
+                <div class="col-lg-4">
+
+                    <div class="step-card">
+
+                        <span class="step-number">
+                            02
+                        </span>
+
+                        <div class="step-icon">
+
+                            <i class="bi bi-cpu"></i>
+
+                        </div>
+
+                        <h4>
+                            AI Analyzes Your Profile
+                        </h4>
+
+                        <p>
+
+                            Our intelligent system analyzes
+                            your skills, education, experience
+                            and other resume information.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Step 3 -->
+
+                <div class="col-lg-4">
+
+                    <div class="step-card">
+
+                        <span class="step-number">
+                            03
+                        </span>
+
+                        <div class="step-icon">
+
+                            <i class="bi bi-graph-up-arrow"></i>
+
+                        </div>
+
+                        <h4>
+                            Discover Job Opportunities
+                        </h4>
+
+                        <p>
+
+                            View relevant job recommendations,
+                            profile matching information and
+                            potential skill gaps.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT SECTION
+    ===================================================== -->
+
+    <section class="contact-section" id="contact">
+
+        <div class="container">
+
+
+            <!-- Contact Heading -->
+
+            <div class="section-heading">
+
+                <span class="section-badge">
+
+                    <i class="bi bi-envelope me-2"></i>
+
+                    CONTACT US
+
+                </span>
+
+                <h2>
+
+                    Get in
+
+                    <span class="gradient-text">
+
+                        touch.
+
+                    </span>
+
+                </h2>
+
+                <p>
+
+                    Have questions about the AI Resume Screening
+                    System? Feel free to get in touch with us.
+
+                </p>
+
+            </div>
+
+
+            <!-- Contact Cards -->
+
+            <div class="row g-4 mt-4 justify-content-center">
+
+
+                <!-- EMAIL -->
+
+                <div class="col-lg col-md-6">
+
+                    <div class="contact-card">
+
+                        <div class="contact-icon">
+
+                            <i class="bi bi-envelope"></i>
+
+                        </div>
+
+                        <h5>
+                            Email
+                        </h5>
+
+                        <!-- CHANGE YOUR EMAIL HERE -->
+
+                        <a href="mailto:your-email@gmail.com">
+
+                            mtharun616@gmail.com
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="col-lg col-md-6">
+
+                    <div class="contact-card">
+
+                        <div class="contact-icon">
+
+                            <i class="bi bi-telephone"></i>
+
+                        </div>
+
+                        <h5>
+                            Phone
+                        </h5>
+
+                        <!-- CHANGE YOUR PHONE NUMBER HERE -->
+
+                        <a href="tel:+91XXXXXXXXXX">
+
+                            +91 8125404616
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="col-lg col-md-6">
+
+                    <div class="contact-card">
+
+                        <div class="contact-icon">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                        </div>
+
+                        <h5>
+                            Location
+                        </h5>
+
+                        <p>
+
+                            Hyderabad, Telangana, India
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LINKEDIN -->
+
+                <div class="col-lg col-md-6">
+
+                    <div class="contact-card">
+
+                        <div class="contact-icon">
+
+                            <i class="bi bi-linkedin"></i>
+
+                        </div>
+
+                        <h5>
+                            LinkedIn
+                        </h5>
+
+                        <a href="https://www.linkedin.com/in/mudavaththarun45"
+                            target="_blank">
+
+                            LinkedIn Profile
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GITHUB -->
+
+                <div class="col-lg col-md-6">
+
+                    <div class="contact-card">
+
+                        <div class="contact-icon">
+
+                            <i class="bi bi-github"></i>
+
+                        </div>
+
+                        <h5>
+                            GitHub
+                        </h5>
+
+                        <a href="https://github.com/Tharunnayak-45"
+                            target="_blank">
+
+                            GitHub Profile
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CTA SECTION
+    ===================================================== -->
+
+    <section class="cta-section">
+
+        <div class="container">
+
+            <div class="cta-box">
+
+                <span class="section-badge">
+
+                    <i class="bi bi-stars me-2"></i>
+
+                    START YOUR JOURNEY
+
+                </span>
+
+
+                <h2 class="mt-4">
+
+                    Ready to discover your
+
+                    <span class="gradient-text">
+
+                        next opportunity?
+
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Create your account, upload your resume,
+                    and let AI help you discover career
+                    opportunities based on your profile.
+
+                </p>
+
+
+                <a href="{{ url_for('register') }}"
+                    class="btn-start">
+
+                    Get Started
+
+                    <i class="bi bi-arrow-right ms-2"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="d-flex flex-wrap justify-content-between
+                align-items-center gap-3">
+
+                <div>
+
+                    <i class="bi bi-robot me-2"></i>
+
+                    AI Resume Screening System
+
+                </div>
+
+                <div>
+
+                    AI-powered resume analysis and
+                    job recommendations.
+
+                </div>
+
+                <div class="d-flex gap-3">
+
+                    <a href="mailto:mtharun616@gmail.com"
+                        aria-label="Email">
+                        <i class="bi bi-envelope"></i>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/mudavaththarun45"
+                        target="_blank" rel="noopener"
+                        aria-label="LinkedIn">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+
+                    <a href="https://github.com/Tharunnayak-45"
+                        target="_blank" rel="noopener"
+                        aria-label="GitHub">
+                        <i class="bi bi-github"></i>
+                    </a>
+
+                </div>
+
+                <div>
+
+                    © 2026 All Rights Reserved
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
     <!-- Bootstrap JS -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
     </script>
 
 
