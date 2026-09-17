@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AI Resume Analysis</title>
 
-    <meta name="description" content="Detailed AI Resume Screening and ATS analysis.">
+    <meta name="description" content="AI Resume Screening and ATS Analysis">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-
-        /* =====================================================
-       GLOBAL
-    ===================================================== */
-
         * {
             margin: 0;
             padding: 0;
@@ -32,10 +27,9 @@
         }
 
         body {
+            min-height: 100vh;
 
             font-family: "Inter", sans-serif;
-
-            min-height: 100vh;
 
             color: #e5e7eb;
 
@@ -56,35 +50,31 @@
             text-decoration: none;
         }
 
-        a:focus-visible {
-            outline: 3px solid #93c5fd;
-            outline-offset: 4px;
+        button,
+        input,
+        textarea {
+            font-family: inherit;
         }
 
-
         /* =====================================================
-       NAVBAR
-    ===================================================== */
+           NAVBAR
+        ===================================================== */
 
         .navbar {
-
             position: sticky;
-
             top: 0;
-
             z-index: 1000;
 
             border-bottom:
                 1px solid rgba(255, 255, 255, 0.10);
 
             background:
-                rgba(7, 11, 22, 0.92);
+                rgba(7, 11, 22, 0.94);
 
             backdrop-filter: blur(18px);
         }
 
         .nav-container {
-
             max-width: 1200px;
 
             margin: auto;
@@ -96,36 +86,36 @@
             align-items: center;
 
             justify-content: space-between;
+
+            gap: 20px;
         }
 
         .logo {
-
             display: flex;
 
             align-items: center;
 
             gap: 10px;
 
+            color: white;
+
             font-size: 20px;
 
             font-weight: 800;
-
-            color: white;
         }
 
         .logo-icon {
-
             width: 38px;
-
             height: 38px;
 
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             border-radius: 12px;
+
+            color: white;
 
             background:
                 linear-gradient(135deg,
@@ -137,7 +127,6 @@
         }
 
         .nav-links {
-
             display: flex;
 
             align-items: center;
@@ -148,18 +137,17 @@
         }
 
         .nav-links a {
-
             display: inline-flex;
 
             align-items: center;
 
             gap: 7px;
 
-            color: #cbd5e1;
-
             padding: 10px 14px;
 
             border-radius: 10px;
+
+            color: #cbd5e1;
 
             font-size: 14px;
 
@@ -169,20 +157,17 @@
         }
 
         .nav-links a:hover {
-
             color: white;
 
             background:
                 rgba(255, 255, 255, 0.08);
         }
 
-
         /* =====================================================
-       MAIN
-    ===================================================== */
+           MAIN
+        ===================================================== */
 
         .main {
-
             max-width: 1200px;
 
             margin: auto;
@@ -191,7 +176,6 @@
         }
 
         .page-header {
-
             display: flex;
 
             align-items: flex-end;
@@ -204,7 +188,6 @@
         }
 
         .eyebrow {
-
             display: inline-flex;
 
             align-items: center;
@@ -213,29 +196,27 @@
 
             padding: 7px 12px;
 
-            border-radius: 30px;
+            margin-bottom: 14px;
 
-            background:
-                rgba(59, 130, 246, 0.10);
+            border-radius: 30px;
 
             border:
                 1px solid rgba(59, 130, 246, 0.25);
 
             color: #93c5fd;
 
+            background:
+                rgba(59, 130, 246, 0.10);
+
             font-size: 12px;
 
             font-weight: 700;
 
             letter-spacing: 0.4px;
-
-            margin-bottom: 14px;
         }
 
         .eyebrow-dot {
-
             width: 7px;
-
             height: 7px;
 
             border-radius: 50%;
@@ -247,12 +228,13 @@
         }
 
         .page-title {
+            color: white;
 
-            font-size: clamp(32px, 5vw, 48px);
+            font-size: clamp(32px,
+                    5vw,
+                    48px);
 
             line-height: 1.1;
-
-            color: white;
 
             font-weight: 800;
 
@@ -260,46 +242,42 @@
         }
 
         .subtitle {
+            margin-top: 12px;
 
             color: #aeb8c8;
-
-            margin-top: 12px;
 
             font-size: 15px;
         }
 
         .file-name {
+            max-width: 350px;
 
             padding: 11px 16px;
 
-            border-radius: 12px;
+            overflow: hidden;
 
-            background:
-                rgba(255, 255, 255, 0.045);
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+
+            border-radius: 12px;
 
             border:
                 1px solid rgba(255, 255, 255, 0.10);
 
             color: #dbeafe;
 
+            background:
+                rgba(255, 255, 255, 0.045);
+
             font-size: 13px;
-
-            white-space: nowrap;
-
-            max-width: 350px;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
         }
 
-
         /* =====================================================
-       CARD
-    ===================================================== */
+           CARDS
+        ===================================================== */
 
         .card {
-
             padding: 28px;
 
             margin-bottom: 22px;
@@ -319,51 +297,48 @@
         }
 
         .card-title {
-
             display: flex;
 
             align-items: center;
+
+            margin-bottom: 22px;
 
             color: white;
 
             font-size: 18px;
 
             font-weight: 700;
-
-            margin-bottom: 22px;
         }
 
         .card-title i {
+            margin-right: 9px;
 
             color: #93c5fd;
-
-            margin-right: 9px;
 
             font-size: 19px;
         }
 
-
         /* =====================================================
-       TOP GRID
-    ===================================================== */
+           TOP GRID
+        ===================================================== */
 
         .top-grid {
-
             display: grid;
 
-            grid-template-columns: 0.9fr 1.5fr;
+            grid-template-columns:
+                0.9fr 1.5fr;
 
             gap: 22px;
 
             margin-bottom: 22px;
         }
 
-
         /* =====================================================
-       SCORE
-    ===================================================== */
+           SCORE
+        ===================================================== */
 
         .score-card {
+            min-height: 380px;
 
             display: flex;
 
@@ -374,17 +349,15 @@
             justify-content: center;
 
             text-align: center;
-
-            min-height: 380px;
         }
 
         .score-ring {
+            --score-degrees: 0deg;
 
             width: 205px;
-
             height: 205px;
 
-            border-radius: 50%;
+            position: relative;
 
             display: flex;
 
@@ -392,7 +365,7 @@
 
             justify-content: center;
 
-            position: relative;
+            border-radius: 50%;
 
             background:
                 conic-gradient(#3b82f6 0deg,
@@ -405,13 +378,11 @@
         }
 
         .score-ring::before {
-
             content: "";
 
             position: absolute;
 
             width: 168px;
-
             height: 168px;
 
             border-radius: 50%;
@@ -420,33 +391,31 @@
         }
 
         .score-content {
-
             position: relative;
 
             z-index: 2;
         }
 
         .score-number {
+            color: white;
 
             font-size: 46px;
 
-            font-weight: 800;
-
-            color: white;
-
             line-height: 1;
+
+            font-weight: 800;
         }
 
         .score-label {
+            margin-top: 8px;
 
             color: #aeb8c8;
 
             font-size: 12px;
-
-            margin-top: 8px;
         }
 
         .score-description {
+            max-width: 350px;
 
             margin-top: 22px;
 
@@ -455,17 +424,13 @@
             font-size: 13px;
 
             line-height: 1.7;
-
-            max-width: 330px;
         }
 
-
         /* =====================================================
-       ATS BREAKDOWN
-    ===================================================== */
+           SCORE BREAKDOWN
+        ===================================================== */
 
         .ats-grid {
-
             display: grid;
 
             grid-template-columns:
@@ -475,39 +440,35 @@
         }
 
         .ats-box {
-
             padding: 18px;
 
             border-radius: 16px;
 
-            background:
-                rgba(255, 255, 255, 0.035);
-
             border:
                 1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255, 255, 255, 0.035);
 
             transition: 0.25s;
         }
 
         .ats-box:hover {
+            transform: translateY(-2px);
 
             background:
                 rgba(255, 255, 255, 0.06);
-
-            transform: translateY(-2px);
         }
 
         .ats-label {
+            margin-bottom: 8px;
 
             color: #aeb8c8;
 
             font-size: 12px;
-
-            margin-bottom: 8px;
         }
 
         .ats-value {
-
             color: white;
 
             font-size: 24px;
@@ -516,21 +477,18 @@
         }
 
         .ats-max {
+            margin-left: 4px;
 
             color: #64748b;
 
             font-size: 12px;
-
-            margin-left: 4px;
         }
 
-
         /* =====================================================
-       INFORMATION GRID
-    ===================================================== */
+           INFORMATION
+        ===================================================== */
 
         .info-grid {
-
             display: grid;
 
             grid-template-columns:
@@ -540,29 +498,26 @@
         }
 
         .info-box {
-
             padding: 18px;
 
             border-radius: 15px;
 
-            background:
-                rgba(255, 255, 255, 0.035);
-
             border:
                 1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255, 255, 255, 0.035);
         }
 
         .info-label {
+            margin-bottom: 7px;
 
             color: #94a3b8;
 
             font-size: 12px;
-
-            margin-bottom: 7px;
         }
 
         .info-value {
-
             color: white;
 
             font-size: 15px;
@@ -572,24 +527,26 @@
             word-break: break-word;
         }
 
-
         /* =====================================================
-       JOB DESCRIPTION
-    ===================================================== */
+           JOB DESCRIPTION
+        ===================================================== */
 
         .job-description {
+            max-height: 350px;
+
+            overflow-y: auto;
 
             padding: 20px;
 
             border-radius: 15px;
 
-            background:
-                rgba(0, 0, 0, 0.18);
-
             border:
                 1px solid rgba(255, 255, 255, 0.08);
 
             color: #c0c9d8;
+
+            background:
+                rgba(0, 0, 0, 0.18);
 
             font-size: 13px;
 
@@ -597,56 +554,51 @@
 
             white-space: pre-wrap;
 
-            max-height: 350px;
-
-            overflow-y: auto;
+            overflow-wrap: anywhere;
         }
 
-
         /* =====================================================
-       KEYWORDS
-    ===================================================== */
+           KEYWORDS
+        ===================================================== */
 
         .keyword-grid {
-
             display: grid;
 
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns:
+                1fr 1fr;
 
             gap: 20px;
         }
 
         .keyword-panel {
+            min-height: 130px;
 
             padding: 20px;
 
             border-radius: 16px;
 
-            background:
-                rgba(255, 255, 255, 0.035);
-
             border:
                 1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255, 255, 255, 0.035);
         }
 
         .keyword-title {
+            margin-bottom: 15px;
 
             color: white;
 
             font-size: 14px;
 
             font-weight: 700;
-
-            margin-bottom: 15px;
         }
 
         .keyword-title i {
-
             margin-right: 6px;
         }
 
         .keyword-list {
-
             display: flex;
 
             flex-wrap: wrap;
@@ -655,6 +607,9 @@
         }
 
         .keyword {
+            display: inline-flex;
+
+            align-items: center;
 
             padding: 8px 12px;
 
@@ -666,7 +621,6 @@
         }
 
         .matched {
-
             color: #bbf7d0;
 
             background:
@@ -677,7 +631,6 @@
         }
 
         .missing {
-
             color: #fecaca;
 
             background:
@@ -687,22 +640,19 @@
                 1px solid rgba(239, 68, 68, 0.20);
         }
 
-
         /* =====================================================
-       SKILLS
-    ===================================================== */
+           SKILLS
+        ===================================================== */
 
         .skill-list {
-
             display: flex;
 
             flex-wrap: wrap;
 
-            gap: 10px;
+            gap: 8px;
         }
 
         .skill {
-
             display: inline-flex;
 
             align-items: center;
@@ -713,39 +663,37 @@
 
             border-radius: 30px;
 
+            border:
+                1px solid rgba(96, 165, 250, 0.25);
+
             color: #dbeafe;
-
-            font-size: 13px;
-
-            font-weight: 600;
 
             background:
                 rgba(59, 130, 246, 0.10);
 
-            border:
-                1px solid rgba(96, 165, 250, 0.25);
+            font-size: 13px;
+
+            font-weight: 600;
         }
 
         .skill::before {
-
             content: "";
 
             width: 6px;
-
             height: 6px;
+
+            flex-shrink: 0;
 
             border-radius: 50%;
 
             background: #93c5fd;
         }
 
-
         /* =====================================================
-       TAGS
-    ===================================================== */
+           TAGS
+        ===================================================== */
 
         .tag-list {
-
             display: flex;
 
             flex-wrap: wrap;
@@ -754,31 +702,32 @@
         }
 
         .tag {
+            display: inline-flex;
+
+            align-items: center;
 
             padding: 9px 13px;
 
             border-radius: 20px;
+
+            border:
+                1px solid rgba(139, 92, 246, 0.22);
 
             color: #ddd6fe;
 
             background:
                 rgba(139, 92, 246, 0.10);
 
-            border:
-                1px solid rgba(139, 92, 246, 0.22);
-
             font-size: 12px;
 
             font-weight: 600;
         }
 
-
         /* =====================================================
-       SUGGESTIONS
-    ===================================================== */
+           SUGGESTIONS
+        ===================================================== */
 
         .suggestion {
-
             display: flex;
 
             align-items: flex-start;
@@ -791,20 +740,18 @@
 
             border-radius: 14px;
 
-            background:
-                rgba(255, 255, 255, 0.035);
-
             border:
                 1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255, 255, 255, 0.035);
         }
 
         .suggestion:last-child {
-
             margin-bottom: 0;
         }
 
         .suggestion-icon {
-
             min-width: 36px;
 
             height: 36px;
@@ -817,14 +764,13 @@
 
             border-radius: 10px;
 
+            color: #fbbf24;
+
             background:
                 rgba(245, 158, 11, 0.10);
-
-            color: #fbbf24;
         }
 
         .suggestion p {
-
             color: #c0c9d8;
 
             font-size: 13px;
@@ -832,43 +778,43 @@
             line-height: 1.7;
         }
 
-
         /* =====================================================
-       RESUME TEXT
-    ===================================================== */
+           RESUME TEXT
+        ===================================================== */
 
         .resume-text {
-
-            max-height: 350px;
+            max-height: 600px;
 
             overflow-y: auto;
 
-            padding: 20px;
+            padding: 22px;
 
             border-radius: 15px;
-
-            background:
-                rgba(0, 0, 0, 0.18);
 
             border:
                 1px solid rgba(255, 255, 255, 0.08);
 
-            color: #c0c9d8;
+            color: #d1d5db;
+
+            background:
+                rgba(0, 0, 0, 0.20);
 
             font-size: 13px;
 
             line-height: 1.8;
 
             white-space: pre-wrap;
+
+            overflow-wrap: anywhere;
+
+            word-break: break-word;
         }
 
-
         /* =====================================================
-       EMPTY STATE
-    ===================================================== */
+           EMPTY
+        ===================================================== */
 
         .empty {
-
             color: #94a3b8;
 
             font-size: 13px;
@@ -876,13 +822,11 @@
             line-height: 1.6;
         }
 
-
         /* =====================================================
-       BUTTONS
-    ===================================================== */
+           BUTTONS
+        ===================================================== */
 
         .actions {
-
             display: flex;
 
             flex-wrap: wrap;
@@ -895,7 +839,6 @@
         }
 
         .btn {
-
             display: inline-flex;
 
             align-items: center;
@@ -918,7 +861,6 @@
         }
 
         .btn-primary {
-
             background:
                 linear-gradient(135deg,
                     #2563eb,
@@ -929,129 +871,158 @@
         }
 
         .btn-primary:hover {
+            color: white;
 
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-
             color: #e2e8f0;
-
-            background:
-                rgba(255, 255, 255, 0.05);
 
             border:
                 1px solid rgba(255, 255, 255, 0.12);
+
+            background:
+                rgba(255, 255, 255, 0.05);
         }
 
         .btn-secondary:hover {
+            color: white;
 
             background:
                 rgba(255, 255, 255, 0.09);
         }
 
+        /* =====================================================
+           SCORE COLOR STATES
+        ===================================================== */
+
+        .score-status {
+            margin-top: 12px;
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #bfdbfe;
+
+            background:
+                rgba(59, 130, 246, 0.10);
+
+            border:
+                1px solid rgba(59, 130, 246, 0.20);
+        }
 
         /* =====================================================
-       RESPONSIVE
-    ===================================================== */
+           RESPONSIVE
+        ===================================================== */
 
         @media (max-width: 850px) {
 
             .top-grid {
-
                 grid-template-columns: 1fr;
             }
 
             .info-grid {
-
                 grid-template-columns: 1fr;
             }
 
             .keyword-grid {
-
                 grid-template-columns: 1fr;
             }
-
         }
-
 
         @media (max-width: 650px) {
 
             .nav-container {
-
                 flex-direction: column;
-
-                gap: 15px;
             }
 
             .nav-links {
-
                 flex-wrap: wrap;
 
                 justify-content: center;
             }
 
             .main {
-
                 padding: 35px 16px 60px;
             }
 
             .card {
-
                 padding: 21px;
             }
 
             .ats-grid {
-
                 grid-template-columns: 1fr;
             }
 
             .score-ring {
-
                 width: 180px;
-
                 height: 180px;
             }
 
             .score-ring::before {
-
                 width: 148px;
-
                 height: 148px;
             }
 
             .page-header {
-
                 flex-direction: column;
 
                 align-items: flex-start;
             }
 
             .file-name {
-
                 max-width: 100%;
 
                 white-space: normal;
             }
 
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
-    
 
 </head>
 
+
 <body>
 
-    <!-- =====================================================
+    {% set ats = ats_data|default({}, true) %}
+
+    {% set current_score = resume_score|default(0, true)|int %}
+
+    {% set current_skills = skills|default([], true) %}
+
+    {% set current_action_verbs = action_verbs|default([], true) %}
+
+    {% set current_quantified_results = quantified_results|default([], true) %}
+
+    {% set current_suggestions = suggestions|default([], true) %}
+
+    {% set current_matched_keywords = matched_keywords|default([], true) %}
+
+    {% set current_missing_keywords = missing_keywords|default([], true) %}
+
+
+    <!-- =========================================================
      NAVBAR
-===================================================== -->
+========================================================= -->
 
     <header class="navbar">
 
-    
         <nav class="nav-container" aria-label="Main navigation">
 
-            <div class="logo">
+            <a href="{{ url_for('dashboard') }}" class="logo">
 
                 <div class="logo-icon">
 
@@ -1063,7 +1034,7 @@
                     AI Resume Screening
                 </span>
 
-            </div>
+            </a>
 
 
             <ul class="nav-links">
@@ -1122,20 +1093,18 @@
             </ul>
 
         </nav>
-        
 
     </header>
 
-    <!-- =====================================================
+
+    <!-- =========================================================
      MAIN
-===================================================== -->
+========================================================= -->
 
     <main class="main">
 
-    
-        <!-- =================================================
-     PAGE HEADER
-================================================= -->
+
+        <!-- PAGE HEADER -->
 
         <header class="page-header">
 
@@ -1156,7 +1125,7 @@
 
 
                 <p class="subtitle">
-                    Detailed ATS analysis for your target job.
+                    Detailed ATS analysis calculated from your uploaded resume.
                 </p>
 
             </div>
@@ -1166,21 +1135,21 @@
 
                 <i class="bi bi-file-earmark-text"></i>
 
-                {{ filename }}
+                {{ filename|default("Resume", true) }}
 
             </div>
 
         </header>
 
 
-        <!-- =================================================
-     SCORE + ATS BREAKDOWN
-================================================= -->
+        <!-- =====================================================
+         SCORE + ATS BREAKDOWN
+    ====================================================== -->
 
         <div class="top-grid">
 
 
-            <!-- SCORE -->
+            <!-- OVERALL SCORE -->
 
             <section class="card score-card">
 
@@ -1193,22 +1162,17 @@
                 </h2>
 
 
-                <div class="score-ring" style="--score-degrees: {{ resume_score * 3.6 }}deg;" role="img"
-                    aria-label="ATS score {{ resume_score }} out of 100">
+                <div class="score-ring" style="--score-degrees: {{ current_score * 3.6 }}deg;" role="img"
+                    aria-label="ATS score {{ current_score }} out of 100">
 
                     <div class="score-content">
 
                         <div class="score-number">
-
-                            {{ resume_score }}
-
+                            {{ current_score }}
                         </div>
 
-
                         <div class="score-label">
-
                             OUT OF 100
-
                         </div>
 
                     </div>
@@ -1216,13 +1180,38 @@
                 </div>
 
 
+                {% if current_score >= 80 %}
+
+                <div class="score-status">
+                    Strong Resume Structure
+                </div>
+
+                {% elif current_score >= 60 %}
+
+                <div class="score-status">
+                    Good — Can Be Improved
+                </div>
+
+                {% elif current_score >= 40 %}
+
+                <div class="score-status">
+                    Needs Improvement
+                </div>
+
+                {% else %}
+
+                <div class="score-status">
+                    Major Improvements Recommended
+                </div>
+
+                {% endif %}
+
+
                 <p class="score-description">
 
-                    Your ATS score is calculated using detected
-                    skills, resume sections, contact information,
-                    resume length, action verbs, quantified
-                    achievements and job-description keyword
-                    matching.
+                    This score is calculated from the actual extracted resume
+                    text using skills, sections, contact information, length,
+                    action verbs, quantified results and target-job keywords.
 
                 </p>
 
@@ -1253,7 +1242,7 @@
 
                         <div class="ats-value">
 
-                            {{ ats_data.skills_score }}
+                            {{ ats.get("skills_score", 0) }}
 
                             <span class="ats-max">
                                 / 20
@@ -1272,7 +1261,7 @@
 
                         <div class="ats-value">
 
-                            {{ ats_data.section_score }}
+                            {{ ats.get("section_score", 0) }}
 
                             <span class="ats-max">
                                 / 22
@@ -1291,7 +1280,7 @@
 
                         <div class="ats-value">
 
-                            {{ ats_data.contact_score }}
+                            {{ ats.get("contact_score", 0) }}
 
                             <span class="ats-max">
                                 / 6
@@ -1310,7 +1299,7 @@
 
                         <div class="ats-value">
 
-                            {{ ats_data.length_score }}
+                            {{ ats.get("length_score", 0) }}
 
                             <span class="ats-max">
                                 / 10
@@ -1329,7 +1318,7 @@
 
                         <div class="ats-value">
 
-                            {{ ats_data.action_score }}
+                            {{ ats.get("action_score", 0) }}
 
                             <span class="ats-max">
                                 / 10
@@ -1348,7 +1337,7 @@
 
                         <div class="ats-value">
 
-                            {{ ats_data.quantified_score }}
+                            {{ ats.get("quantified_score", 0) }}
 
                             <span class="ats-max">
                                 / 7
@@ -1367,7 +1356,7 @@
 
                         <div class="ats-value">
 
-                            {{ ats_data.keyword_score }}
+                            {{ ats.get("keyword_score", 0) }}
 
                             <span class="ats-max">
                                 / 25
@@ -1386,7 +1375,7 @@
 
                         <div class="ats-value">
 
-                            {{ ats_data.keyword_match_percentage }}%
+                            {{ ats.get("keyword_match_percentage", 0) }}%
 
                         </div>
 
@@ -1400,9 +1389,134 @@
         </div>
 
 
-        <!-- =================================================
-     TARGET JOB
-================================================= -->
+        <!-- =====================================================
+         SCORE CALCULATION
+    ====================================================== -->
+
+        <section class="card">
+
+            <h2 class="card-title">
+
+                <i class="bi bi-calculator"></i>
+
+                Score Calculation
+
+            </h2>
+
+
+            <div class="info-grid">
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Skills
+                    </div>
+
+                    <div class="info-value">
+                        {{ ats.get("skills_score", 0) }} / 20
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Sections
+                    </div>
+
+                    <div class="info-value">
+                        {{ ats.get("section_score", 0) }} / 22
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Contact
+                    </div>
+
+                    <div class="info-value">
+                        {{ ats.get("contact_score", 0) }} / 6
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Length
+                    </div>
+
+                    <div class="info-value">
+                        {{ ats.get("length_score", 0) }} / 10
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Action Verbs
+                    </div>
+
+                    <div class="info-value">
+                        {{ ats.get("action_score", 0) }} / 10
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Quantified Results
+                    </div>
+
+                    <div class="info-value">
+                        {{ ats.get("quantified_score", 0) }} / 7
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Job Keywords
+                    </div>
+
+                    <div class="info-value">
+                        {{ ats.get("keyword_score", 0) }} / 25
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Total ATS Score
+                    </div>
+
+                    <div class="info-value">
+                        {{ current_score }} / 100
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+         TARGET JOB
+    ====================================================== -->
 
         <section class="card">
 
@@ -1427,13 +1541,9 @@
                     <div class="info-value">
 
                         {% if job_title %}
-
                         {{ job_title }}
-
                         {% else %}
-
                         Not provided
-
                         {% endif %}
 
                     </div>
@@ -1450,13 +1560,9 @@
                     <div class="info-value">
 
                         {% if company %}
-
                         {{ company }}
-
                         {% else %}
-
                         Not provided
-
                         {% endif %}
 
                     </div>
@@ -1473,13 +1579,9 @@
                     <div class="info-value">
 
                         {% if location %}
-
                         {{ location }}
-
                         {% else %}
-
                         Not provided
-
                         {% endif %}
 
                     </div>
@@ -1492,9 +1594,9 @@
         </section>
 
 
-        <!-- =================================================
-     JOB DESCRIPTION
-================================================= -->
+        <!-- =====================================================
+         JOB DESCRIPTION
+    ====================================================== -->
 
         {% if job_description %}
 
@@ -1510,11 +1612,9 @@
 
 
             <div class="job-description">
-            
 
                 {{ job_description }}
 
-                
             </div>
 
         </section>
@@ -1522,9 +1622,9 @@
         {% endif %}
 
 
-        <!-- =================================================
-     KEYWORD ANALYSIS
-================================================= -->
+        <!-- =====================================================
+         KEYWORD ANALYSIS
+    ====================================================== -->
 
         <section class="card">
 
@@ -1537,10 +1637,12 @@
             </h2>
 
 
+            {% if job_description %}
+
             <div class="keyword-grid">
 
 
-                <!-- MATCHED KEYWORDS -->
+                <!-- MATCHED -->
 
                 <div class="keyword-panel">
 
@@ -1553,11 +1655,11 @@
                     </div>
 
 
-                    {% if matched_keywords %}
+                    {% if current_matched_keywords %}
 
                     <div class="keyword-list">
 
-                        {% for keyword in matched_keywords %}
+                        {% for keyword in current_matched_keywords %}
 
                         <span class="keyword matched">
 
@@ -1572,10 +1674,7 @@
                     {% else %}
 
                     <p class="empty">
-
-                        No matching job-description skills
-                        were detected.
-
+                        No matching job keywords were detected.
                     </p>
 
                     {% endif %}
@@ -1583,7 +1682,7 @@
                 </div>
 
 
-                <!-- MISSING KEYWORDS -->
+                <!-- MISSING -->
 
                 <div class="keyword-panel">
 
@@ -1596,11 +1695,11 @@
                     </div>
 
 
-                    {% if missing_keywords %}
+                    {% if current_missing_keywords %}
 
                     <div class="keyword-list">
 
-                        {% for keyword in missing_keywords %}
+                        {% for keyword in current_missing_keywords %}
 
                         <span class="keyword missing">
 
@@ -1615,10 +1714,7 @@
                     {% else %}
 
                     <p class="empty">
-
-                        No missing job-description skills
-                        were detected.
-
+                        No missing job keywords were detected.
                     </p>
 
                     {% endif %}
@@ -1628,12 +1724,33 @@
 
             </div>
 
+            {% else %}
+
+            <div class="suggestion">
+
+                <div class="suggestion-icon">
+
+                    <i class="bi bi-info-circle"></i>
+
+                </div>
+
+                <p>
+                    No target job description was provided.
+                    Keyword matching is therefore 0/25.
+                    Upload the resume again with a target job description
+                    to calculate job-specific keyword matching.
+                </p>
+
+            </div>
+
+            {% endif %}
+
         </section>
 
 
-        <!-- =================================================
-     DETECTED SKILLS
-================================================= -->
+        <!-- =====================================================
+         DETECTED SKILLS
+    ====================================================== -->
 
         <section class="card">
 
@@ -1646,11 +1763,11 @@
             </h2>
 
 
-            {% if skills %}
+            {% if current_skills %}
 
             <div class="skill-list">
 
-                {% for skill in skills %}
+                {% for skill in current_skills %}
 
                 <span class="skill">
 
@@ -1665,9 +1782,8 @@
             {% else %}
 
             <p class="empty">
-
-                No technical skills were detected.
-
+                No supported technical skills were detected in the
+                extracted resume text.
             </p>
 
             {% endif %}
@@ -1675,9 +1791,9 @@
         </section>
 
 
-        <!-- =================================================
-     ACTION VERBS
-================================================= -->
+        <!-- =====================================================
+         ACTION VERBS
+    ====================================================== -->
 
         <section class="card">
 
@@ -1690,16 +1806,14 @@
             </h2>
 
 
-            {% if action_verbs %}
+            {% if current_action_verbs %}
 
             <div class="tag-list">
 
-                {% for verb in action_verbs %}
+                {% for verb in current_action_verbs %}
 
                 <span class="tag">
-
                     {{ verb }}
-
                 </span>
 
                 {% endfor %}
@@ -1709,9 +1823,7 @@
             {% else %}
 
             <p class="empty">
-
                 No predefined action verbs were detected.
-
             </p>
 
             {% endif %}
@@ -1719,9 +1831,9 @@
         </section>
 
 
-        <!-- =================================================
-     QUANTIFIED RESULTS
-================================================= -->
+        <!-- =====================================================
+         QUANTIFIED RESULTS
+    ====================================================== -->
 
         <section class="card">
 
@@ -1734,16 +1846,14 @@
             </h2>
 
 
-            {% if quantified_results %}
+            {% if current_quantified_results %}
 
             <div class="tag-list">
 
-                {% for result in quantified_results %}
+                {% for result in current_quantified_results %}
 
                 <span class="tag">
-
                     {{ result }}
-
                 </span>
 
                 {% endfor %}
@@ -1756,10 +1866,8 @@
 
                 No quantified achievements were detected.
 
-                Add accurate numbers, percentages,
-                project counts, users, modules or
-                measurable results to your resume
-                where appropriate.
+                Add accurate numbers, percentages, project counts,
+                users, modules or measurable results where appropriate.
 
             </p>
 
@@ -1768,9 +1876,9 @@
         </section>
 
 
-        <!-- =================================================
-     SUGGESTIONS
-================================================= -->
+        <!-- =====================================================
+         SUGGESTIONS
+    ====================================================== -->
 
         <section class="card">
 
@@ -1783,9 +1891,9 @@
             </h2>
 
 
-            {% if suggestions %}
+            {% if current_suggestions %}
 
-            {% for suggestion in suggestions %}
+            {% for suggestion in current_suggestions %}
 
             <div class="suggestion">
 
@@ -1796,9 +1904,7 @@
                 </div>
 
                 <p>
-
                     {{ suggestion }}
-
                 </p>
 
             </div>
@@ -1816,11 +1922,7 @@
                 </div>
 
                 <p>
-
                     No additional suggestions were generated.
-                    Continue tailoring your resume to the
-                    target job description.
-
                 </p>
 
             </div>
@@ -1830,9 +1932,9 @@
         </section>
 
 
-        <!-- =================================================
-     RESUME INFORMATION
-================================================= -->
+        <!-- =====================================================
+         RESUME INFORMATION
+    ====================================================== -->
 
         <section class="card">
 
@@ -1856,7 +1958,10 @@
 
                     <div class="info-value">
 
-                        {{ filename }}
+                        {{ filename|default(
+                        "Not available",
+                        true
+                        ) }}
 
                     </div>
 
@@ -1871,7 +1976,7 @@
 
                     <div class="info-value">
 
-                        {{ text_length }}
+                        {{ text_length|default(0, true) }}
 
                     </div>
 
@@ -1886,7 +1991,10 @@
 
                     <div class="info-value">
 
-                        {{ skills_count }}
+                        {{ skills_count|default(
+                        current_skills|length,
+                        true
+                        ) }}
 
                     </div>
 
@@ -1898,9 +2006,9 @@
         </section>
 
 
-        <!-- =================================================
-     EXTRACTED RESUME TEXT
-================================================= -->
+        <!-- =====================================================
+         EXTRACTED RESUME TEXT
+    ====================================================== -->
 
         <section class="card">
 
@@ -1913,15 +2021,39 @@
             </h2>
 
 
-            <div class="resume-text" tabindex="0" role="region" aria-label="Extracted resume text">{{ resume_text }}
+            {% if resume_text %}
+
+            <div class="resume-text" tabindex="0" role="region" aria-label="Extracted resume text">
+
+                {{ resume_text }}
+
             </div>
+
+            {% else %}
+
+            <div class="suggestion">
+
+                <div class="suggestion-icon">
+
+                    <i class="bi bi-exclamation-triangle"></i>
+
+                </div>
+
+                <p>
+                    No resume text was extracted.
+                    Please upload a text-based PDF or DOCX resume.
+                </p>
+
+            </div>
+
+            {% endif %}
 
         </section>
 
 
-        <!-- =================================================
-     ACTION BUTTONS
-================================================= -->
+        <!-- =====================================================
+         ACTION BUTTONS
+    ====================================================== -->
 
         <nav class="actions" aria-label="Resume analysis actions">
 

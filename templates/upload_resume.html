@@ -1,16 +1,18 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Upload Resume | ATS Analyzer</title>
+    <title>Upload Resume</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -18,399 +20,451 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+
             min-height: 100vh;
+
+            font-family: "Inter", sans-serif;
+
+            color: #e5e7eb;
+
             background:
-                radial-gradient(circle at top left, #1e3a8a 0%, transparent 35%),
-                radial-gradient(circle at bottom right, #581c87 0%, transparent 35%),
-                #07111f;
-            color: #ffffff;
+                radial-gradient(circle at 10% 10%,
+                    rgba(59, 130, 246, .18),
+                    transparent 30%),
+                radial-gradient(circle at 90% 20%,
+                    rgba(139, 92, 246, .16),
+                    transparent 30%),
+                #070b16;
+
         }
 
         .navbar {
-            height: 70px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, .1);
+
+            background:
+                rgba(7, 11, 22, .92);
+
+            padding: 18px 30px;
+
+        }
+
+        .nav {
+
+            max-width: 1150px;
+
+            margin: auto;
+
             display: flex;
-            align-items: center;
+
             justify-content: space-between;
-            padding: 0 7%;
-            background: rgba(5, 15, 30, 0.85);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            align-items: center;
+
+            gap: 20px;
+
         }
 
         .logo {
-            font-size: 22px;
-            font-weight: bold;
+
+            color: white;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
         }
 
-        .logo span {
-            color: #60a5fa;
-        }
+        .links {
 
-        .nav-links {
             display: flex;
-            gap: 25px;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
         }
 
-        .nav-links a {
-            color: #dbeafe;
+        .links a {
+
+            color: #cbd5e1;
+
             text-decoration: none;
-            font-size: 15px;
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
         }
 
-        .nav-links a:hover {
-            color: #60a5fa;
+        .links a:hover {
+
+            background:
+                rgba(255, 255, 255, .08);
+
+            color: white;
+
         }
 
         .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 45px auto;
+
+            max-width: 850px;
+
+            margin: auto;
+
+            padding: 55px 20px 80px;
+
         }
 
-        .header {
+        .heading {
+
             text-align: center;
+
             margin-bottom: 30px;
+
         }
 
-        .header h1 {
-            font-size: 36px;
+        .heading h1 {
+
+            color: white;
+
+            font-size: 40px;
+
             margin-bottom: 10px;
+
         }
 
-        .header p {
+        .heading p {
+
             color: #94a3b8;
-            font-size: 16px;
+
+            font-size: 14px;
+
         }
 
         .card {
-            background: rgba(15, 23, 42, 0.78);
-            border: 1px solid rgba(255,255,255,0.10);
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
-            backdrop-filter: blur(15px);
+
+            padding: 30px;
+
+            border-radius: 22px;
+
+            border:
+                1px solid rgba(255, 255, 255, .1);
+
+            background:
+                rgba(255, 255, 255, .045);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, .25);
+
+        }
+
+        .section-title {
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            margin-bottom: 20px;
+
         }
 
         .form-group {
-            margin-bottom: 22px;
+
+            margin-bottom: 20px;
+
         }
 
         label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #e2e8f0;
-        }
 
-        .required {
-            color: #f87171;
+            display: block;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
         }
 
         input,
         textarea {
+
             width: 100%;
-            padding: 14px 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(15,23,42,0.9);
-            color: white;
-            font-size: 15px;
+
+            padding: 13px 14px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(255, 255, 255, .12);
+
             outline: none;
+
+            color: white;
+
+            background:
+                rgba(0, 0, 0, .22);
+
+            font-family: inherit;
+
         }
 
         input:focus,
         textarea:focus {
-            border-color: #60a5fa;
-            box-shadow: 0 0 0 3px rgba(96,165,250,0.12);
+
+            border-color:
+                rgba(96, 165, 250, .7);
+
+            box-shadow:
+                0 0 0 3px rgba(59, 130, 246, .1);
+
         }
 
         textarea {
-            min-height: 230px;
+
+            min-height: 190px;
+
             resize: vertical;
+
             line-height: 1.6;
+
         }
 
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .hint {
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            margin-top: 6px;
+
         }
 
         .upload-box {
-            border: 2px dashed rgba(96,165,250,0.45);
-            border-radius: 15px;
-            padding: 35px 20px;
-            text-align: center;
-            background: rgba(30,58,138,0.08);
-            margin-bottom: 25px;
-            cursor: pointer;
-        }
 
-        .upload-box:hover {
-            border-color: #60a5fa;
-            background: rgba(30,58,138,0.15);
-        }
+            padding: 25px;
 
-        .upload-icon {
-            font-size: 45px;
-            margin-bottom: 12px;
-        }
+            margin-bottom: 30px;
 
-        .upload-box h3 {
-            margin-bottom: 8px;
-        }
+            border-radius: 16px;
 
-        .upload-box p {
-            color: #94a3b8;
-            font-size: 14px;
-        }
+            border:
+                1px dashed rgba(96, 165, 250, .35);
 
-        #fileName {
-            margin-top: 12px;
-            color: #60a5fa;
-            font-weight: bold;
-        }
+            background:
+                rgba(59, 130, 246, .05);
 
-        .job-note {
-            color: #94a3b8;
-            font-size: 13px;
-            margin-top: 7px;
-        }
-
-        .button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: linear-gradient(
-                135deg,
-                #2563eb,
-                #7c3aed
-            );
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .button:hover {
-            opacity: 0.92;
-            transform: translateY(-1px);
-        }
-
-        .flash {
-            padding: 13px 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            background: rgba(239,68,68,0.15);
-            border: 1px solid rgba(239,68,68,0.3);
-            color: #fecaca;
-        }
-
-        .section-title {
-            font-size: 20px;
-            margin: 10px 0 18px;
-            color: #bfdbfe;
         }
 
         .divider {
+
             height: 1px;
-            background: rgba(255,255,255,0.08);
+
+            background:
+                rgba(255, 255, 255, .08);
+
             margin: 30px 0;
+
         }
 
-        @media (max-width: 700px) {
+        .btn {
 
-            .navbar {
-                padding: 0 5%;
+            width: 100%;
+
+            border: none;
+
+            padding: 14px 20px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            background:
+                linear-gradient(135deg,
+                    #2563eb,
+                    #7c3aed);
+
+        }
+
+        .btn:hover {
+
+            transform: translateY(-1px);
+
+        }
+
+        .optional {
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: 400;
+
+        }
+
+        @media(max-width:700px) {
+
+            .nav {
+
+                flex-direction: column;
+
             }
 
-            .nav-links {
-                gap: 12px;
-            }
+            .heading h1 {
 
-            .nav-links a {
-                font-size: 13px;
-            }
+                font-size: 30px;
 
-            .container {
-                width: 94%;
-                margin: 25px auto;
             }
 
             .card {
-                padding: 22px;
+
+                padding: 20px;
+
             }
 
-            .two-column {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .header h1 {
-                font-size: 28px;
-            }
         }
-
     </style>
+
 
 </head>
 
-
 <body>
 
-    <nav class="navbar">
 
-        <div class="logo">
-            ATS<span>Analyzer</span>
-        </div>
+    <header class="navbar">
 
-        <div class="nav-links">
+        <nav class="nav">
 
-            <a href="{{ url_for('dashboard') }}">
-                Dashboard
-            </a>
+            <div class="logo">
 
-            <a href="{{ url_for('jobs') }}">
-                Jobs
-            </a>
+                ✨ AI Resume Screening
 
-            <a href="{{ url_for('logout') }}">
-                Logout
-            </a>
+            </div>
 
-        </div>
+            <div class="links">
 
-    </nav>
+                <a href="{{ url_for('dashboard') }}">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('upload_resume') }}">
+                    Upload Resume
+                </a>
+
+                <a href="{{ url_for('jobs') }}">
+                    Jobs
+                </a>
+
+                <a href="{{ url_for('logout') }}">
+                    Logout
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
 
 
-    <div class="container">
+    <main class="container">
 
-        <div class="header">
+        <div class="heading">
 
-            <h1>ATS Resume Analyzer</h1>
+            <h1>
+                Analyze Your Resume
+            </h1>
 
             <p>
-                Upload your resume and compare it with a target job description.
+                Upload your resume and optionally provide a
+                target job description for keyword matching.
             </p>
 
         </div>
 
 
-        {% with messages = get_flashed_messages() %}
+        <form method="POST" action="{{ url_for('upload_resume') }}" enctype="multipart/form-data">
 
-            {% if messages %}
+            <div class="card">
 
-                {% for message in messages %}
-
-                    <div class="flash">
-                        {{ message }}
-                    </div>
-
-                {% endfor %}
-
-            {% endif %}
-
-        {% endwith %}
-
-
-        <div class="card">
-
-            <form
-                method="POST"
-                enctype="multipart/form-data"
-                id="uploadForm"
-            >
-
-                <!-- ==========================================
-                     RESUME
-                =========================================== -->
 
                 <div class="section-title">
-                    1. Upload Your Resume
-                </div>
 
-
-                <div
-                    class="upload-box"
-                    onclick="document.getElementById('resume').click()"
-                >
-
-                    <div class="upload-icon">
-                        📄
-                    </div>
-
-                    <h3>
-                        Choose Resume
-                    </h3>
-
-                    <p>
-                        Supported formats: PDF and DOCX
-                    </p>
-
-                    <div id="fileName">
-                        No file selected
-                    </div>
+                    Resume File
 
                 </div>
 
 
-                <input
-                    type="file"
-                    id="resume"
-                    name="resume"
-                    accept=".pdf,.docx"
-                    required
-                    style="display:none;"
-                >
+                <div class="upload-box">
+
+                    <div class="form-group">
+
+                        <label for="resume">
+                            Select Resume
+                        </label>
+
+                        <input type="file" id="resume" name="resume" accept=".pdf,.docx" required>
+
+                        <div class="hint">
+
+                            Supported formats:
+                            PDF and DOCX.
+                            Maximum size: 10 MB.
+
+                        </div>
+
+                    </div>
+
+                </div>
 
 
                 <div class="divider"></div>
 
 
-                <!-- ==========================================
-                     JOB DETAILS
-                =========================================== -->
-
                 <div class="section-title">
-                    2. Target Job Details
+
+                    Target Job
+
+                    <span class="optional">
+                        Optional
+                    </span>
+
                 </div>
 
 
-                <div class="two-column">
+                <div class="form-group">
 
-                    <div class="form-group">
+                    <label for="job_title">
+                        Job Title
+                    </label>
 
-                        <label for="job_title">
-                            Job Title <span class="required">*</span>
-                        </label>
+                    <input type="text" id="job_title" name="job_title" placeholder="Example: Java Developer">
 
-                        <input
-                            type="text"
-                            id="job_title"
-                            name="job_title"
-                            placeholder="Example: Java Developer"
-                            required
-                        >
-
-                    </div>
+                </div>
 
 
-                    <div class="form-group">
+                <div class="form-group">
 
-                        <label for="company">
-                            Company
-                        </label>
+                    <label for="company">
+                        Company
+                    </label>
 
-                        <input
-                            type="text"
-                            id="company"
-                            name="company"
-                            placeholder="Example: Infosys"
-                        >
-
-                    </div>
+                    <input type="text" id="company" name="company" placeholder="Example: Infosys">
 
                 </div>
 
@@ -418,15 +472,10 @@
                 <div class="form-group">
 
                     <label for="location">
-                        Job Location
+                        Location
                     </label>
 
-                    <input
-                        type="text"
-                        id="location"
-                        name="location"
-                        placeholder="Example: Hyderabad"
-                    >
+                    <input type="text" id="location" name="location" placeholder="Example: Hyderabad">
 
                 </div>
 
@@ -434,91 +483,39 @@
                 <div class="form-group">
 
                     <label for="job_description">
+
                         Job Description
-                        <span class="required">*</span>
+
                     </label>
 
-                    <textarea
-                        id="job_description"
-                        name="job_description"
-                        placeholder="Paste the complete job description here..."
-                        required
-                    ></textarea>
+                    <textarea id="job_description" name="job_description"
+                        placeholder="Paste the complete job description here..."></textarea>
 
-                    <div class="job-note">
-                        The system will compare your resume skills and keywords
-                        with this job description.
+                    <div class="hint">
+
+                        Providing a job description allows the
+                        system to calculate matched and missing
+                        keywords.
+
                     </div>
 
                 </div>
 
 
-                <!-- ==========================================
-                     SUBMIT
-                =========================================== -->
+                <button type="submit" class="btn">
 
-                <button
-                    type="submit"
-                    class="button"
-                >
-                    🚀 Analyze Resume with ATS
+                    Analyze Resume
+
                 </button>
 
-            </form>
 
-        </div>
+            </div>
 
-    </div>
+        </form>
 
+    </main>
 
-    <script>
-
-        const resumeInput =
-            document.getElementById("resume");
-
-        const fileName =
-            document.getElementById("fileName");
-
-
-        resumeInput.addEventListener(
-            "change",
-            function () {
-
-                if (this.files.length > 0) {
-
-                    fileName.textContent =
-                        "Selected: " + this.files[0].name;
-
-                } else {
-
-                    fileName.textContent =
-                        "No file selected";
-
-                }
-
-            }
-        );
-
-
-        document.getElementById("uploadForm")
-            .addEventListener(
-                "submit",
-                function () {
-
-                    const button =
-                        document.querySelector(".button");
-
-                    button.textContent =
-                        "⏳ Analyzing Resume...";
-
-                    button.disabled = true;
-
-                }
-            );
-
-    </script>
 
 </body>
 
 </html>
-

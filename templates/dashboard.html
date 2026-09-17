@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,11 +9,9 @@
 
     <title>Dashboard | AI Resume Screening</title>
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -28,13 +25,13 @@
 
             --bg2: #091127;
 
-            --card: rgba(255,255,255,0.055);
+            --card: rgba(255, 255, 255, 0.055);
 
-            --card-hover: rgba(255,255,255,0.085);
+            --card-hover: rgba(255, 255, 255, 0.085);
 
-            --border: rgba(255,255,255,0.10);
+            --border: rgba(255, 255, 255, 0.10);
 
-            --border-blue: rgba(0,217,255,0.28);
+            --border-blue: rgba(0, 217, 255, 0.28);
 
             --white: #ffffff;
 
@@ -65,29 +62,21 @@
 
             background:
 
-                radial-gradient(
-                    circle at 10% 5%,
-                    rgba(0,229,255,.13),
-                    transparent 28%
-                ),
+                radial-gradient(circle at 10% 5%,
+                    rgba(0, 229, 255, .13),
+                    transparent 28%),
 
-                radial-gradient(
-                    circle at 90% 15%,
-                    rgba(121,92,255,.16),
-                    transparent 30%
-                ),
+                radial-gradient(circle at 90% 15%,
+                    rgba(121, 92, 255, .16),
+                    transparent 30%),
 
-                radial-gradient(
-                    circle at 50% 100%,
-                    rgba(66,133,255,.10),
-                    transparent 35%
-                ),
+                radial-gradient(circle at 50% 100%,
+                    rgba(66, 133, 255, .10),
+                    transparent 35%),
 
-                linear-gradient(
-                    135deg,
+                linear-gradient(135deg,
                     var(--bg),
-                    var(--bg2)
-                );
+                    var(--bg2));
 
             overflow-x: hidden;
         }
@@ -170,14 +159,12 @@
 
             0% {
                 transform:
-                    translate(0,0)
-                    scale(1);
+                    translate(0, 0) scale(1);
             }
 
             100% {
                 transform:
-                    translate(50px,-35px)
-                    scale(1.15);
+                    translate(50px, -35px) scale(1.15);
             }
         }
 
@@ -196,25 +183,19 @@
 
             background-image:
 
-                linear-gradient(
-                    rgba(255,255,255,.5) 1px,
-                    transparent 1px
-                ),
+                linear-gradient(rgba(255, 255, 255, .5) 1px,
+                    transparent 1px),
 
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,.5) 1px,
-                    transparent 1px
-                );
+                linear-gradient(90deg,
+                    rgba(255, 255, 255, .5) 1px,
+                    transparent 1px);
 
             background-size: 55px 55px;
 
             mask-image:
-                linear-gradient(
-                    to bottom,
+                linear-gradient(to bottom,
                     black,
-                    transparent 90%
-                );
+                    transparent 90%);
         }
 
 
@@ -241,18 +222,16 @@
             justify-content: space-between;
 
             background:
-                rgba(5,8,22,.72);
+                rgba(5, 8, 22, .72);
 
             border-bottom:
-                1px solid
-                rgba(255,255,255,.08);
+                1px solid rgba(255, 255, 255, .08);
 
             backdrop-filter:
                 blur(22px);
 
             box-shadow:
-                0 10px 40px
-                rgba(0,0,0,.15);
+                0 10px 40px rgba(0, 0, 0, .15);
         }
 
 
@@ -294,20 +273,16 @@
 
             background:
 
-                linear-gradient(
-                    135deg,
+                linear-gradient(135deg,
                     #7657ff,
                     #4285ff,
-                    #00d9ff
-                );
+                    #00d9ff);
 
             box-shadow:
 
-                0 0 20px
-                rgba(0,217,255,.20),
+                0 0 20px rgba(0, 217, 255, .20),
 
-                0 8px 25px
-                rgba(72,101,255,.25);
+                0 8px 25px rgba(72, 101, 255, .25);
 
             font-size: 20px;
         }
@@ -356,11 +331,10 @@
             color: white;
 
             background:
-                rgba(255,255,255,.06);
+                rgba(255, 255, 255, .06);
 
             box-shadow:
-                0 0 18px
-                rgba(0,217,255,.08);
+                0 0 18px rgba(0, 217, 255, .08);
         }
 
 
@@ -377,7 +351,7 @@
             color: #ff7d8a;
 
             background:
-                rgba(255,80,100,.07);
+                rgba(255, 80, 100, .07);
         }
 
 
@@ -439,11 +413,10 @@
             color: #8beaff;
 
             background:
-                rgba(0,217,255,.07);
+                rgba(0, 217, 255, .07);
 
             border:
-                1px solid
-                rgba(0,217,255,.18);
+                1px solid rgba(0, 217, 255, .18);
 
             font-size: 11px;
 
@@ -452,8 +425,7 @@
             letter-spacing: .3px;
 
             box-shadow:
-                0 0 20px
-                rgba(0,217,255,.06);
+                0 0 20px rgba(0, 217, 255, .06);
         }
 
 
@@ -499,12 +471,10 @@
 
             background:
 
-                linear-gradient(
-                    90deg,
+                linear-gradient(90deg,
                     #ffffff,
                     #8edfff,
-                    #a996ff
-                );
+                    #a996ff);
 
             -webkit-background-clip: text;
 
@@ -559,20 +529,16 @@
 
             background:
 
-                linear-gradient(
-                    135deg,
+                linear-gradient(135deg,
                     #7657ff,
                     #4285ff,
-                    #00bfff
-                );
+                    #00bfff);
 
             box-shadow:
 
-                0 10px 30px
-                rgba(66,133,255,.22),
+                0 10px 30px rgba(66, 133, 255, .22),
 
-                0 0 25px
-                rgba(0,217,255,.10);
+                0 0 25px rgba(0, 217, 255, .10);
 
             transition: .25s ease;
         }
@@ -585,11 +551,9 @@
 
             box-shadow:
 
-                0 15px 35px
-                rgba(66,133,255,.35),
+                0 15px 35px rgba(66, 133, 255, .35),
 
-                0 0 35px
-                rgba(0,217,255,.18);
+                0 0 35px rgba(0, 217, 255, .18);
         }
 
 
@@ -602,7 +566,7 @@
             display: grid;
 
             grid-template-columns:
-                repeat(3,1fr);
+                repeat(3, 1fr);
 
             gap: 18px;
 
@@ -621,18 +585,16 @@
             border-radius: 20px;
 
             background:
-                rgba(255,255,255,.045);
+                rgba(255, 255, 255, .045);
 
             border:
-                1px solid
-                rgba(255,255,255,.085);
+                1px solid rgba(255, 255, 255, .085);
 
             backdrop-filter:
                 blur(18px);
 
             box-shadow:
-                0 15px 45px
-                rgba(0,0,0,.12);
+                0 15px 45px rgba(0, 0, 0, .12);
 
             transition:
                 .3s ease;
@@ -670,18 +632,16 @@
                 translateY(-4px);
 
             border-color:
-                rgba(0,217,255,.20);
+                rgba(0, 217, 255, .20);
 
             background:
-                rgba(255,255,255,.065);
+                rgba(255, 255, 255, .065);
 
             box-shadow:
 
-                0 20px 55px
-                rgba(0,0,0,.18),
+                0 20px 55px rgba(0, 0, 0, .18),
 
-                0 0 30px
-                rgba(0,217,255,.06);
+                0 0 30px rgba(0, 217, 255, .06);
         }
 
 
@@ -714,15 +674,13 @@
             color: #71eaff;
 
             background:
-                rgba(0,217,255,.08);
+                rgba(0, 217, 255, .08);
 
             border:
-                1px solid
-                rgba(0,217,255,.13);
+                1px solid rgba(0, 217, 255, .13);
 
             box-shadow:
-                0 0 20px
-                rgba(0,217,255,.06);
+                0 0 20px rgba(0, 217, 255, .06);
 
             font-size: 19px;
         }
@@ -756,8 +714,7 @@
                 #35e59a;
 
             box-shadow:
-                0 0 10px
-                #35e59a;
+                0 0 10px #35e59a;
         }
 
 
@@ -839,7 +796,7 @@
             display: grid;
 
             grid-template-columns:
-                repeat(3,1fr);
+                repeat(3, 1fr);
 
             gap: 18px;
 
@@ -864,11 +821,10 @@
             text-decoration: none;
 
             background:
-                rgba(255,255,255,.045);
+                rgba(255, 255, 255, .045);
 
             border:
-                1px solid
-                rgba(255,255,255,.085);
+                1px solid rgba(255, 255, 255, .085);
 
             backdrop-filter:
                 blur(18px);
@@ -911,18 +867,16 @@
                 translateY(-5px);
 
             border-color:
-                rgba(0,217,255,.24);
+                rgba(0, 217, 255, .24);
 
             background:
-                rgba(255,255,255,.07);
+                rgba(255, 255, 255, .07);
 
             box-shadow:
 
-                0 20px 50px
-                rgba(0,0,0,.18),
+                0 20px 50px rgba(0, 0, 0, .18),
 
-                0 0 30px
-                rgba(0,217,255,.07);
+                0 0 30px rgba(0, 217, 255, .07);
         }
 
 
@@ -951,11 +905,10 @@
             color: #7beaff;
 
             background:
-                rgba(0,217,255,.08);
+                rgba(0, 217, 255, .08);
 
             border:
-                1px solid
-                rgba(0,217,255,.12);
+                1px solid rgba(0, 217, 255, .12);
 
             font-size: 21px;
 
@@ -969,8 +922,7 @@
                 scale(1.08);
 
             box-shadow:
-                0 0 25px
-                rgba(0,217,255,.12);
+                0 0 25px rgba(0, 217, 255, .12);
         }
 
 
@@ -1035,18 +987,16 @@
             border-radius: 22px;
 
             background:
-                rgba(255,255,255,.045);
+                rgba(255, 255, 255, .045);
 
             border:
-                1px solid
-                rgba(255,255,255,.085);
+                1px solid rgba(255, 255, 255, .085);
 
             backdrop-filter:
                 blur(18px);
 
             box-shadow:
-                0 20px 60px
-                rgba(0,0,0,.13);
+                0 20px 60px rgba(0, 0, 0, .13);
         }
 
 
@@ -1082,8 +1032,7 @@
                 18px 0;
 
             border-bottom:
-                1px solid
-                rgba(255,255,255,.065);
+                1px solid rgba(255, 255, 255, .065);
 
             transition: .25s;
         }
@@ -1134,15 +1083,13 @@
             color: #ff7c8a;
 
             background:
-                rgba(255,90,110,.08);
+                rgba(255, 90, 110, .08);
 
             border:
-                1px solid
-                rgba(255,100,120,.13);
+                1px solid rgba(255, 100, 120, .13);
 
             box-shadow:
-                0 0 20px
-                rgba(255,80,100,.05);
+                0 0 20px rgba(255, 80, 100, .05);
 
             font-size: 19px;
         }
@@ -1204,11 +1151,10 @@
                 #80ddf2;
 
             background:
-                rgba(0,217,255,.06);
+                rgba(0, 217, 255, .06);
 
             border:
-                1px solid
-                rgba(0,217,255,.10);
+                1px solid rgba(0, 217, 255, .10);
 
             font-size: 9px;
         }
@@ -1239,23 +1185,19 @@
 
             background:
 
-                linear-gradient(
-                    135deg,
+                linear-gradient(135deg,
                     #7657ff,
-                    #4285ff
-                );
+                    #4285ff);
 
             border:
-                1px solid
-                rgba(255,255,255,.10);
+                1px solid rgba(255, 255, 255, .10);
 
             font-size: 11px;
 
             font-weight: 600;
 
             box-shadow:
-                0 7px 20px
-                rgba(66,100,255,.18);
+                0 7px 20px rgba(66, 100, 255, .18);
 
             transition: .25s;
         }
@@ -1268,11 +1210,9 @@
 
             box-shadow:
 
-                0 10px 25px
-                rgba(66,100,255,.30),
+                0 10px 25px rgba(66, 100, 255, .30),
 
-                0 0 20px
-                rgba(0,217,255,.10);
+                0 0 20px rgba(0, 217, 255, .10);
         }
 
 
@@ -1310,11 +1250,10 @@
                 #61728d;
 
             background:
-                rgba(255,255,255,.035);
+                rgba(255, 255, 255, .035);
 
             border:
-                1px solid
-                rgba(255,255,255,.07);
+                1px solid rgba(255, 255, 255, .07);
 
             font-size: 30px;
         }
@@ -1589,7 +1528,6 @@
                     240px;
             }
         }
-
     </style>
 
 </head>
@@ -1707,15 +1645,11 @@
 
 
                 <h1>
-
                     Welcome back,
-
                     <span>
-                        {{ name }}
+                        {{ user_name }}
                     </span>
-
                     👋
-
                 </h1>
 
 
@@ -1733,10 +1667,7 @@
 
             <div class="hero-action">
 
-                <a
-                    href="{{ url_for('upload_resume') }}"
-                    class="upload-btn"
-                >
+                <a href="{{ url_for('upload_resume') }}" class="upload-btn">
 
                     <i class="bi bi-cloud-arrow-up"></i>
 
@@ -1912,10 +1843,7 @@
 
             <!-- UPLOAD -->
 
-            <a
-                href="{{ url_for('upload_resume') }}"
-                class="action-card"
-            >
+            <a href="{{ url_for('upload_resume') }}" class="action-card">
 
 
                 <div class="action-icon">
@@ -1948,10 +1876,7 @@
 
             <!-- JOBS -->
 
-            <a
-                href="{{ url_for('jobs') }}"
-                class="action-card"
-            >
+            <a href="{{ url_for('jobs') }}" class="action-card">
 
 
                 <div class="action-icon">
@@ -1984,10 +1909,7 @@
 
             <!-- LOGOUT -->
 
-            <a
-                href="{{ url_for('logout') }}"
-                class="action-card"
-            >
+            <a href="{{ url_for('logout') }}" class="action-card">
 
 
                 <div class="action-icon">
@@ -2061,123 +1983,120 @@
             {% if resumes %}
 
 
-                {% for resume in resumes %}
+            {% for resume in resumes %}
 
 
-                <div class="resume-item">
+            <div class="resume-item">
 
 
-                    <div class="resume-left">
+                <div class="resume-left">
 
 
-                        <div class="resume-icon">
+                    <div class="resume-icon">
 
-                            <i class="bi bi-file-earmark-pdf"></i>
+                        <i class="bi bi-file-earmark-pdf"></i>
+
+                    </div>
+
+
+                    <div>
+
+
+                        <div class="resume-name">
+
+                            {{ resume.filename }}
+
+                        </div>
+
+
+                        <div class="resume-date">
+
+                            <i class="bi bi-clock"></i>
+
+                            Uploaded:
+
+                            {{ resume.uploaded_at }}
 
                         </div>
 
 
-                        <div>
+                        {% if resume.skills %}
 
 
-                            <div class="resume-name">
-
-                                {{ resume.filename }}
-
-                            </div>
+                        <div class="skills">
 
 
-                            <div class="resume-date">
-
-                                <i class="bi bi-clock"></i>
-
-                                Uploaded:
-
-                                {{ resume.uploaded_at }}
-
-                            </div>
+                            {% for skill in resume.skills.split(',') %}
 
 
-                            {% if resume.skills %}
+                            <span class="skill">
+
+                                {{ skill.strip() }}
+
+                            </span>
 
 
-                            <div class="skills">
-
-
-                                {% for skill in resume.skills.split(',') %}
-
-
-                                <span class="skill">
-
-                                    {{ skill.strip() }}
-
-                                </span>
-
-
-                                {% endfor %}
-
-
-                            </div>
-
-
-                            {% endif %}
+                            {% endfor %}
 
 
                         </div>
+
+
+                        {% endif %}
 
 
                     </div>
 
 
-                    <a
-                        href="{{ url_for('analyze_resume') }}"
-                        class="analysis-btn"
-                    >
-
-                        <i class="bi bi-bar-chart-line"></i>
-
-                        Analyze
-
-                    </a>
-
-
                 </div>
 
 
-                {% endfor %}
+                <a href="{{ url_for('analyze_resume') }}" class="analysis-btn">
+
+                    <i class="bi bi-bar-chart-line"></i>
+
+                    Analyze
+
+                </a>
+
+
+            </div>
+
+
+            {% endfor %}
 
 
             {% else %}
 
 
-                <!-- EMPTY STATE -->
+            <!-- EMPTY STATE -->
 
-                <div class="empty">
-
-
-                    <div class="empty-icon">
-
-                        <i class="bi bi-file-earmark-x"></i>
-
-                    </div>
+            <div class="empty">
 
 
-                    <h3>
+                <div class="empty-icon">
 
-                        No resumes found
-
-                    </h3>
-
-
-                    <p>
-
-                        Upload your first resume to start
-                        AI-powered analysis.
-
-                    </p>
-
+                    <i class="bi bi-file-earmark-x"></i>
 
                 </div>
+
+
+                <h3>
+
+                    No resumes found
+
+                </h3>
+
+
+                <p>
+
+                    Upload your first resume to start
+                    AI-powered analysis.
+
+                </p>
+
+
+            </div>
 
 
             {% endif %}
@@ -2209,4 +2128,3 @@
 </body>
 
 </html>
-
