@@ -56,10 +56,25 @@ ALLOWED_EXTENSIONS = {
 # ============================================================
 
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "ai_resume_db",
+    "host": os.environ.get("MYSQLHOST", "localhost"),
+    "port": int(
+        os.environ.get(
+            "MYSQLPORT",
+            3306
+        )
+    ),
+    "user": os.environ.get(
+        "MYSQLUSER",
+        "root"
+    ),
+    "password": os.environ.get(
+        "MYSQLPASSWORD",
+        "root"
+    ),
+    "database": os.environ.get(
+        "MYSQLDATABASE",
+        "ai_resume_db"
+    ),
     "charset": "utf8mb4"
 }
 
@@ -334,6 +349,7 @@ def get_db_connection():
 
         connection = mysql.connector.connect(
             host=DB_CONFIG["host"],
+            port=DB_CONFIG["port"],
             user=DB_CONFIG["user"],
             password=DB_CONFIG["password"],
             database=DB_CONFIG["database"],
@@ -371,6 +387,7 @@ def initialize_database():
 
         connection = mysql.connector.connect(
             host=DB_CONFIG["host"],
+            port=DB_CONFIG["port"],
             user=DB_CONFIG["user"],
             password=DB_CONFIG["password"]
         )
@@ -468,10 +485,10 @@ def initialize_database():
         # ----------------------------------------------------
         # IMPORTANT
         #
-        # jobs table already exists in your database.
+        # The jobs table already exists in your database.
         #
-        # Therefore this application does NOT create
-        # or modify the jobs table.
+        # This application does NOT create, alter, or modify
+        # the existing jobs table.
         # ----------------------------------------------------
 
         # ----------------------------------------------------
@@ -1578,10 +1595,6 @@ def register():
         ""
     )
 
-    # --------------------------------------------------------
-    # VALIDATION
-    # --------------------------------------------------------
-
     if (
         not full_name
         or not email
@@ -1634,10 +1647,6 @@ def register():
             url_for("register")
         )
 
-    # --------------------------------------------------------
-    # DATABASE CONNECTION
-    # --------------------------------------------------------
-
     connection = get_db_connection()
 
     if connection is None:
@@ -1656,10 +1665,6 @@ def register():
     try:
 
         cursor = connection.cursor()
-
-        # ----------------------------------------------------
-        # CHECK EXISTING USER
-        # ----------------------------------------------------
 
         cursor.execute(
             """
@@ -1683,17 +1688,9 @@ def register():
                 url_for("login")
             )
 
-        # ----------------------------------------------------
-        # HASH PASSWORD
-        # ----------------------------------------------------
-
         hashed_password = generate_password_hash(
             password
         )
-
-        # ----------------------------------------------------
-        # INSERT USER
-        # ----------------------------------------------------
 
         cursor.execute(
             """
@@ -1820,10 +1817,6 @@ def login():
         ""
     )
 
-    # --------------------------------------------------------
-    # VALIDATION
-    # --------------------------------------------------------
-
     if not email or not password:
 
         flash(
@@ -1834,10 +1827,6 @@ def login():
         return redirect(
             url_for("login")
         )
-
-    # --------------------------------------------------------
-    # DATABASE
-    # --------------------------------------------------------
 
     connection = get_db_connection()
 
@@ -1877,10 +1866,6 @@ def login():
 
         user = cursor.fetchone()
 
-        # ----------------------------------------------------
-        # CHECK USER
-        # ----------------------------------------------------
-
         if user:
 
             stored_password = user.get(
@@ -1918,10 +1903,6 @@ def login():
                 return redirect(
                     url_for("dashboard")
                 )
-
-        # ----------------------------------------------------
-        # INVALID LOGIN
-        # ----------------------------------------------------
 
         flash(
             "Invalid email or password.",
@@ -2054,7 +2035,12 @@ def dashboard():
 
     return render_template(
         "dashboard.html",
-        resumes=resumes
+        resumes=resumes,
+        resume_count=len(resumes),
+        user_name=session.get(
+            "user_name",
+            "User"
+        )
     )
 
 
@@ -2475,7 +2461,7 @@ def upload_resume():
         connection.commit()
 
         # ----------------------------------------------------
-        # CLOSE DATABASE BEFORE RENDERING
+        # CLOSE DATABASE
         # ----------------------------------------------------
 
         cursor.close()
@@ -2537,20 +2523,12 @@ def upload_resume():
             e
         )
 
-        # ----------------------------------------------------
-        # ROLLBACK
-        # ----------------------------------------------------
-
         if connection:
 
             try:
                 connection.rollback()
             except Exception:
                 pass
-
-        # ----------------------------------------------------
-        # DELETE FILE
-        # ----------------------------------------------------
 
         try:
 
@@ -2591,14 +2569,18 @@ def upload_resume():
 
 
 # ============================================================
-# ANALYZE RESUME
+# ANALYZE SAVED RESUME
 # ============================================================
 
 @app.route(
     "/analyze-resume",
-    methods=["POST"]
+    methods=["GET", "POST"]
 )
 def analyze_resume():
+
+    # --------------------------------------------------------
+    # LOGIN REQUIRED
+    # --------------------------------------------------------
 
     if "user_id" not in session:
 
@@ -2610,6 +2592,377 @@ def analyze_resume():
         return redirect(
             url_for("login")
         )
+
+    # ========================================================
+    # GET REQUEST
+    #
+    # This is used when clicking the Analyze button
+    # from the Dashboard.
+    #
+    # Example:
+    #
+    # /analyze-resume?resume_id=5
+    #
+    # ========================================================
+
+    if request.method == "GET":
+
+        resume_id = request.args.get(
+            "resume_id",
+            type=int
+        )
+
+        if not resume_id:
+
+            flash(
+                "Please select a resume to analyze.",
+                "warning"
+            )
+
+            return redirect(
+                url_for("dashboard")
+            )
+
+        connection = get_db_connection()
+
+        if connection is None:
+
+            flash(
+                "Database connection failed.",
+                "danger"
+            )
+
+            return redirect(
+                url_for("dashboard")
+            )
+
+        cursor = None
+
+        try:
+
+            cursor = connection.cursor(
+                dictionary=True
+            )
+
+            # ------------------------------------------------
+            # IMPORTANT SECURITY CHECK
+            #
+            # The resume must belong to the logged-in user.
+            # ------------------------------------------------
+
+            cursor.execute(
+                """
+                SELECT
+                    id,
+                    user_id,
+                    filename,
+                    extracted_text,
+                    skills,
+                    uploaded_at
+                FROM resumes
+                WHERE id = %s
+                AND user_id = %s
+                LIMIT 1
+                """,
+                (
+                    resume_id,
+                    session["user_id"]
+                )
+            )
+
+            resume = cursor.fetchone()
+
+            if not resume:
+
+                flash(
+                    "Resume not found.",
+                    "danger"
+                )
+
+                return redirect(
+                    url_for("dashboard")
+                )
+
+            resume_text = resume.get(
+                "extracted_text"
+            ) or ""
+
+            if not resume_text:
+
+                flash(
+                    "No extracted text is available for this resume.",
+                    "danger"
+                )
+
+                return redirect(
+                    url_for("dashboard")
+                )
+
+            # ------------------------------------------------
+            # AUTOMATIC GENERAL ATS ANALYSIS
+            #
+            # No job description is required when analyzing
+            # directly from the Dashboard.
+            # ------------------------------------------------
+
+            ats_data = calculate_ats_score(
+                resume_text,
+                ""
+            )
+
+            # ------------------------------------------------
+            # SAVE NEW ANALYSIS RESULT
+            # ------------------------------------------------
+
+            cursor.execute(
+                """
+                INSERT INTO analysis_results
+                (
+                    resume_id,
+                    resume_score,
+                    text_length,
+                    skills_count,
+                    detected_skills,
+                    suggestions
+                )
+                VALUES (%s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    resume_id,
+
+                    ats_data["overall_score"],
+
+                    len(resume_text),
+
+                    len(
+                        ats_data[
+                            "detected_skills"
+                        ]
+                    ),
+
+                    json.dumps(
+                        ats_data[
+                            "detected_skills"
+                        ]
+                    ),
+
+                    json.dumps(
+                        ats_data[
+                            "suggestions"
+                        ]
+                    )
+                )
+            )
+
+            # ------------------------------------------------
+            # SAVE ATS SCORE
+            #
+            # This is a general resume analysis, so there is
+            # no job description ID.
+            # ------------------------------------------------
+
+            cursor.execute(
+                """
+                INSERT INTO ats_scores
+                (
+                    resume_id,
+                    job_description_id,
+                    overall_score,
+                    skills_score,
+                    section_score,
+                    contact_score,
+                    length_score,
+                    action_score,
+                    quantified_score,
+                    keyword_score,
+                    keyword_match_percentage,
+                    matched_keywords,
+                    missing_keywords,
+                    detected_skills,
+                    action_verbs,
+                    quantified_results,
+                    suggestions
+                )
+                VALUES (
+                    %s, %s, %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s, %s, %s,
+                    %s, %s, %s
+                )
+                """,
+                (
+                    resume_id,
+
+                    None,
+
+                    ats_data["overall_score"],
+
+                    ats_data["skills_score"],
+
+                    ats_data["section_score"],
+
+                    ats_data["contact_score"],
+
+                    ats_data["length_score"],
+
+                    ats_data["action_score"],
+
+                    ats_data["quantified_score"],
+
+                    ats_data["keyword_score"],
+
+                    ats_data[
+                        "keyword_match_percentage"
+                    ],
+
+                    json.dumps(
+                        ats_data[
+                            "matched_keywords"
+                        ]
+                    ),
+
+                    json.dumps(
+                        ats_data[
+                            "missing_keywords"
+                        ]
+                    ),
+
+                    json.dumps(
+                        ats_data[
+                            "detected_skills"
+                        ]
+                    ),
+
+                    json.dumps(
+                        ats_data[
+                            "action_verbs"
+                        ]
+                    ),
+
+                    json.dumps(
+                        ats_data[
+                            "quantified_results"
+                        ]
+                    ),
+
+                    json.dumps(
+                        ats_data[
+                            "suggestions"
+                        ]
+                    )
+                )
+            )
+
+            connection.commit()
+
+            return render_template(
+                "resume_analysis.html",
+
+                filename=resume[
+                    "filename"
+                ],
+
+                resume_text=resume_text,
+
+                resume_score=ats_data[
+                    "overall_score"
+                ],
+
+                skills=ats_data[
+                    "detected_skills"
+                ],
+
+                action_verbs=ats_data[
+                    "action_verbs"
+                ],
+
+                quantified_results=ats_data[
+                    "quantified_results"
+                ],
+
+                matched_keywords=ats_data[
+                    "matched_keywords"
+                ],
+
+                missing_keywords=ats_data[
+                    "missing_keywords"
+                ],
+
+                job_title="",
+
+                company="",
+
+                location="",
+
+                job_description="",
+
+                ats_data=ats_data
+            )
+
+        except Error as e:
+
+            if connection:
+
+                try:
+                    connection.rollback()
+                except Exception:
+                    pass
+
+            print(
+                "Saved resume analysis database error:",
+                e
+            )
+
+            flash(
+                "Could not analyze the selected resume.",
+                "danger"
+            )
+
+            return redirect(
+                url_for("dashboard")
+            )
+
+        except Exception as e:
+
+            if connection:
+
+                try:
+                    connection.rollback()
+                except Exception:
+                    pass
+
+            print(
+                "Saved resume analysis error:",
+                e
+            )
+
+            flash(
+                "An error occurred while analyzing the resume.",
+                "danger"
+            )
+
+            return redirect(
+                url_for("dashboard")
+            )
+
+        finally:
+
+            if cursor:
+
+                try:
+                    cursor.close()
+                except Exception:
+                    pass
+
+            try:
+                connection.close()
+            except Exception:
+                pass
+
+    # ========================================================
+    # POST REQUEST
+    #
+    # This preserves the existing upload/analyze form flow.
+    # ========================================================
 
     return upload_resume()
 
@@ -2651,7 +3004,10 @@ def jobs():
             )
 
             # ------------------------------------------------
-            # Existing jobs table
+            # Read existing jobs table
+            #
+            # IMPORTANT:
+            # This table is NOT created or modified here.
             # ------------------------------------------------
 
             cursor.execute(

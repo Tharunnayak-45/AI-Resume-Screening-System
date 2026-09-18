@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+
+venv/
+.venv/
+env/
+
+.env
+
+uploads/*
+!uploads/.gitkeep
+
+*.log
+
+ai_resume_db_backup.sql
+
+.vscode/
